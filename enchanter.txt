@@ -1,0 +1,366 @@
+			 Enchanter
+			 ---------
+
+			Introduction
+
+"Enchanter" is a new adventure game in the Zork tradition,
+but in a different setting and with a different overall
+philosophy.  The emphasis in Zork was on treasure and
+fighting, but in Enchanter the emphasis is on magic.
+
+This document describes the game as currently envisioned.
+Comments are welcome; send them to Dave (PDL) and Marc
+(BLANK).
+
+		      General Comments
+
+The viewpoint character is a low-level magician.  He has a
+few abilities represented by spells in his spell book.  The
+goal of the game is two-fold.  First, to become a better
+magician.  Second, to defeat an evil magician who is taking
+over the dungeon, repairing the damage he has done.
+
+			 The Milieu
+
+The dungeon is deteriorating, from the point of view of
+anyone reasonable (such as you, we hope).  Rooms are
+darkening, passages choking off (via magic and rockfalls),
+monsters are being released to prowl the halls.
+
+			The Warlock
+
+The evil magician is "the Warlock."  He just recently moved
+into the neighborhood and began taking it over, and you were
+sent by the Council to clear him out.  He is much too much
+of a wizard for you to take on directly until the end of the
+game, and if you try (which should be possible), you get
+fried for your trouble.  The Warlock is possibly also the
+priest who sacrifices you in the Temple scene.  The
+Warlock's Tower (which is nonetheless underground) is at the
+top (bottom?) of the Endless Stair, and guarded by nasty
+creatures with nasty sharp teeth, etc.  They are probably
+evilly magicked bunny rabbits.
+
+		       The Adventurer
+
+The Adventurer may come to your assistance after you magic
+him over from the other side of the mirror.  He is from the
+Zork world, effectively, and comes equipped with an Elvish
+sword and various other paraphenalia.  He will be turned
+against you by the Warlock at some point and have to be made
+friendly again.  He will be needed to perform some task
+which is too physical for a cerebral type such as you. 
+While he is turned against you he is like the thief in Zork,
+and may even attack you.
+
+			  Monsters
+
+There are lots of nasty, sharp-toothed creatures wandering
+around.  Eventually, you can avoid them via "Protection from
+Evil."  If you don't, you will get destroyed pretty quickly,
+or perhaps captured by the bad guys for sacrifice to their
+even nastier dieties.
+
+			   Spells
+
+Magic plays a big part in this game.  There are several
+magical objects, magic spells (which you learn as you go
+along), and your spell-book, which is all-important. See
+"Spells, Detail" below for more on spells.
+
+The ultimate action in the game is going to be to say some
+number of spells sequentially at the Warlock, which will
+banish him and restore the dungeon.
+
+Some spells (English names):
+
+ *Light (makes a light wherever the caster goes)
+  Open (opens something closed; a passage, a box...)
+  Resurrect (restores something dead to life)
+  Charm (makes someone friendly to you)
+ *Write Magic (allows you to copy a spell into book)
+  Fly (lets you fly around)
+  Haste (makes things go fast)
+ *Talk to Animals (lets you talk to turtle)
+
+and others. * marks spells you have at the beginning.
+
+		      Events/Problems
+
+			  Darkness
+
+As the game begins, you are in total darkness, having just
+entered the underground (perhaps you were teleported there
+by the Council).  You have only your spell book. 
+Fortunately, the words written in such books glow in the
+dark, so if you open the book you can read the spells you
+have, one of which is "Light".
+
+			 Sacrifice
+
+This is probably the only overt reference to the Zork
+trilogy, as it is based on the Viewing Table scene in Zork
+3.  You are captured by the followers of the Warlock and
+dragged to the Temple, where you are sacrificed in a rite
+horrible and bloody.  You are left lying on the altar, the
+magical sacrificial knife stuck in your chest.  If you had
+the foresight to cast a "cheat death" beforehand, you revive
+a few moves later.
+
+			Gordian Knot
+
+An ornate box is wrapped securely in a magic rope which you
+cannot cut or untie.  In fact, if you try to untie it, it
+reties the next move.  Like the original, this knot must be
+cut, but with a magical blade (it's a magical rope, after
+all).  The blade is the sacrificial knife from the Temple
+scene.  The prize here is (naturally enough) the "Open"
+spell.
+
+		       Endless Stair
+
+The entrance to the Warlock's Tower is an infinite stair.
+It is literally infinite, in that you can go up or down it
+any number of times (keep a count and a table of objects and
+locations in case twit drops things).  Now, it isn't really
+infinite, it's only an illusion, and by casting that "Dispel
+Illusion," you discover it's actually only a round room
+which you have been marching around in for hours, and has an
+exit opposite the entrance.
+
+		       Malleable Maze
+
+There is an area of about ten rooms in a traditional Zork
+maze configuration.  There is a (magic?) map of this area
+with none of the connections shown, only the rooms.  As you
+roam about in the maze, the connections appear.
+
+Interestingly enough, there is one room you can't get to.
+Fortunately, there is also a (magic?) pencil which you can
+use to draw in connections in this area.  If you use it to
+draw the connection to the final room, you can retrieve the
+scroll contained therein, but also disturb the monster which
+guards it.
+
+The monster chases you and can catch you if you don't erase
+an appropriate connection or two, trapping him.
+
+The map and pencil can be used to vary the maze in any way
+you choose, erasing and drawing passages.  Perhaps the maze
+should even be generated randomly in each game.  It would be
+represented by ten tables of eight elements (or ten, if we
+include up and down as directions).  You would draw by
+saying "Connect Red Room to Blue Room," and erase by saying
+"Disconnect Red Room from Blue Room."
+
+			   Sleep
+
+"Sleep" is both a spell and something you must do from time
+to time.  By sleeping, you recover the energy used to cast
+spells and can rememorize spells.  Also, you get a vision in
+a dream that either gives you a spell or a clue to solving
+one of the puzzles.  This could even be a "Hint" facility if
+we wanted it to be.
+
+		      Purloined Letter
+
+This is the problem the silly adventurer is useful for.
+There is a huge door, decorated with magical runes and
+obvious enormously charged with power.  It might even say
+something on it like "Magician, Keep Out!"  If you touch it,
+you get seriously frotzed, and "Open" fizzles against it.
+This door is warded to the hilt.  However, if you ask the
+adventurer to open it, he has no trouble, not being a
+magician.  In fact, he doesn't even see it as a formidable
+door, just a random dungeon door.  If you ask him, he will
+tell you.  "Dispel Illusion" will reveal this, and waste the
+spell.
+
+		       Rainbow Turtle
+
+This huge, brightly decorated creature wanders around on the
+beach.  See "Gears" for more.
+
+			   Gears
+
+Huge grinding gears and pounding machinery fill a certain
+room. Things are being thrown around in here, all the time,
+and if you try to get across the room to get the spell
+scroll clearly visible in an alcove, you are speared or
+crushed by the pounding machinery.  The turtle is impervious
+to the spears but is crushed by the pounding stuff.  But, if
+you cast "Talk to Animals" on him, you can ask him to
+retrieve the scroll.  If you cast "Haste" on him, he can get
+across between "Crunch!" and "Crunch!", otherwise he is
+smushed.
+
+		     Faberge Easter Egg
+
+This is an object of great beauty and enormous complexity. 
+It has lots of little twisty handles and knobs and stuff in
+the filigree (which you see if you examine it).  They
+presumably open it (and in fact they do, if all turned or
+pushed or whatever).  However, if the Egg is opened that
+way, the stuff these frobs are connected to inside destroy
+the scroll contained within.  You must use the "Open" spell
+to actually open it safety.
+
+
+		       Spells, Detail
+	    (Theory and Practice of Thaumaturgy)
+
+[Much of what follows is adapted from "real" D&D.]
+
+Spells are ways of performing magic.  They are either
+general in their effect ("Light!") or specific ("Open!").
+Spells have an English name and a one-word nonsense
+incantation to invoke them.  For example, "Light!" might be
+invoked by "Krebf!" and "Open!" by "Frotz the door!"  You
+may encounter the incantation word without knowing the
+associated English for a spell!  It is therefore possible to
+invoke a spell without knowing for sure what it will do.
+
+You have a spell book.  Your spell book records the spells
+you learn.  There is a distinction between learning a spell
+and memorizing it for use.  Only a small number of spells
+can actually be memorized at one time, and you must rest and
+rememorize them to use them again.  A spell written in your
+spell book can be memorized again and again.  Once you have
+memorized a spell, you can use it without having the spell
+book around.  When you use a spell you have memorized, you
+forget it.
+
+You might have a spell book containing ten spells, but only
+be able to memorize five of them at one time.  Correct
+selection of spells to memorize is one aspect of the game.
+If you lose your spell book, you are in deep trouble.
+
+Newly found spells may be written into your spell book using
+the spell "Write magic!"  Sometimes a spell is too powerful
+to be used more than once, and it appears in the book in a
+different form.  Such spells disappear from the book after
+being used (the book "forgets" them).
+
+Once a spell is written in your spell book, its English name
+becomes apparent.  In fact, reading your book probably would
+look like:
+
+	Spell Book
+
+	Frotz - perpetual light
+	Ozmoo - open a closed object
+	Fweep - charm an unfriendly creature
+etc.
+
+There will be a command ("Spells") which will inventory
+those spells you have memorized for this day.  It is
+possible to memorize a spell more than once; you get "more
+than one copy," in some sense. If you try to memorize more
+spells than you can remember, you will forget the first one
+memorized.
+
+Magic spells usually have a duration, and sometimes a cycle
+time (meaning that you can't do them many times right in a
+row).
+
+In addition to the Spell Book and Spells, there is going to
+need to be a sort of crib sheet giving enough detail for the
+player to get started.  The rationale is that having just
+graduated from Wizard School, you are still a little shakey.
+
+	       Spell Implementation, Details
+
+You want syntaxes like:
+
+	<spell>.		FROTZ!  ("Light!")
+	<spell> <object>.	FWEEP DOOR!  ("Open door!")
+	Cast <spell> spell.
+	Cast <spell> on <object>.
+	Cast <spell> spell on object.
+
+SPELL is the main synonym, so:
+
+	>Cast spell
+	Which spell, the foo spell or the bar spell?
+
+You should also be able to
+
+	>Learn <spell>
+	>Frob <spell>	;Where "frob" is "write magic"
+	>Memorize <spell>
+	>Memorize <spell> twice  ;Frill?
+
+I see a "spell" as being the following;
+
+	<OBJECT FOO-SPELL
+		(IN SPELL-BOOK)
+		(SYNONYM SPELL)
+		(ADJECTIVE FOO)
+		(MEMORIZED 0) ;"count of times memorized"
+		(ACTION FOO-SPELL-F)
+		... >
+
+There is also a GLOBAL-FOO-SPELL, which is not put in
+GLOBAL-OBJECTS until you first encounter/learn "Foo."
+GLOBAL-FOO-SPELL has its ACTION property the same as
+FOO-SPELL's, and so all checking is done in the same place.
+The command to check your memorized spells can just wander
+down the list of all spells and tell you which have
+MEMORIZED properties greater than zero.
+
+
+
+		 Other Possible Characters
+
+Dwarves -- these guys are getting out, and might tell you
+about the Warlock and about the Terror if you ask.  They
+would be comic figures like those in Steve's book.  They
+might also give you a weapon (which you can't use, being a
+magician).
+
+Cultists -- worshippers of the evil Warlock.  They would be
+the ones to capture you and take you to the Temple.
+
+		Other Possible Problem Ideas
+
+;;This problem is superceded by the Malleable Maze, but is
+;;left here in case we can salvage a smaller problem from
+;;it. 
+;;		       Maze of Glass
+
+;;This is a large room divided into small rooms by glass
+;;partitions, some of which are there, some not, to produce a
+;;maze.  You must have the "Fly" spell to solve it, because
+;;some of the exits are "Up".  There is a spell scroll as a
+;;prize. Implementation is analogous to that of the Chinese
+;;puzzle in Zork 3.  Depending on how nasty we want to be,
+;;this could be a 3x3x3 up to a 5x5x5 cube.
+
+"Coal Chute" - adapt Coal Chute problem from original Zork. 
+Use magic rope?  Gist is that you can hang on for a limited
+time and carry a limited weight, and there is an exit in the
+middle of the chute.  This may be too "Zorkish" for Enchanter.
+
+
+
+		    Summary of Problems
+
+-Specific Problems-	-File-	-You Need-
+
+Darkness			"Light"
+Sacrifice		TEMPLE	"Resurrect"
+Gordian Knot		KNOT	Magic Knife
+Malleable Maze		TERROR	Magic Pencil and Map
+Adventurer			"Summon" and "Charm"
+Purloined Letter	PURLOINED Adventurer or "Dispel Illusion"
+Faberge Easter Egg	EGG	"Open"
+Sleep			SLEEP
+Gears/Turtle		GEARS	"Talk to Animals" and "Haste"
+Endless Stair		STAIR	"Dispel Illusion"
+Warlock				everything
+
+-General Problems-	-File-	-You Need-
+
+Protect Self			"Protection from Evil"
+Protect Spell Book		"Protection from Evil"?
+Magic/Learning Spells	MAGIC	"Write Magic"

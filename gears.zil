@@ -101,7 +101,7 @@ may be controlling the whole thing, for all you know." CR>)>>
 
 <OBJECT SWITCHES
 	(IN CLOSET)
-	(DESC "glowing control")
+	(DESC "glowing button")
 	(SYNONYM DIAL CONTROL BUTTON DIALS)
 	(ADJECTIVE ARCANE GLOWING)
 	(FLAGS NDESCBIT)
@@ -219,8 +219,9 @@ in fact. You can't dodge them, and you are severely skewered.">)
 you are succeeding for a while until you set off a trap. A volley of sharp
 spears, powered by cunning machinery, comes at you from all directions.
 You are skewered! The huge hammer crashes down for the coup de grace.">)>
+		<CRLF>
 		<COND (<==? ,DEATH-CHEATED ,ME>
-		       <TELL CR
+		       <TELL
 "In an astounding feat of magic, you are reassembled and revived.
 In an even more astounding feat of trap design, you are dispatched again
 almost before you can take a breath." CR>)>
@@ -299,7 +300,6 @@ the rainbow.")
 	(ACTION TURTLE-F)>
 
 <OBJECT GLOBAL-TURTLE
-	(IN GLOBAL-OBJECTS)
 	(DESC "rainbow turtle")
 	(SYNONYM TURTLE)
 	(ADJECTIVE RAINBOW)
@@ -313,6 +313,7 @@ the rainbow.")
 <ROUTINE TURTLE-F ("AUX" NEAR?)
 	 <SET NEAR? <IN? ,TURTLE <LOC ,PLAYER>>>
 	 <COND (<EQUAL? ,WINNER ,TURTLE>
+		<MOVE ,GLOBAL-TURTLE ,GLOBAL-OBJECTS>
 		<COND (,TURTLE-TIRED?
 		       <COND (.NEAR?
 			      <TELL
@@ -323,10 +324,13 @@ the rainbow.")
 		<ENABLE <QUEUE I-TURTLE -1>>
 		<FSET ,TURTLE ,TOUCHBIT>
 		<COND (<NOT <EQUAL? ,TALK-TO-ANIMAL? ,TURTLE>>
-		       <TELL
+		       <COND (.NEAR?
+			      <TELL
 "The turtle looks at you quizzically. It's clear he would like to
 understand you, but he doesn't. He responds, but it's only snaps, hisses,
-and clicks to you." CR>
+and clicks to you." CR>)
+			     (ELSE
+			      <NO-RESPONSE>)>
 		       <SETG P-CONT <>>
 		       <SETG QUOTE-FLAG <>>
 		       <RTRUE>)
@@ -352,7 +356,7 @@ of bad feeling about it, like you get when you eat old seaweed.\"" CR>)
 			      <COND (.NEAR?
 				     <TELL
 "The turtle huffs and puffs up the stairs. \"Pretty steep stairs
-for a turtle, friend....\"" CR>)>
+for a turtle, friend...\"" CR>)>
 			      <RFALSE>)
 			     (<AND <EQUAL? ,PRSO ,P?DOWN>
 				   <GLOBAL-IN? ,STAIRS <LOC ,TURTLE>>>

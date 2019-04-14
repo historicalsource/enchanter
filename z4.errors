@@ -1,0 +1,35 @@
+Assembling Z4.XZAP.4 on Wednesday, August 20, 1986 17:19:27
+Release: 29
+
+    64	Inserting Z4FREQ.XZAP.1	   (626 bytes)
+   690	Inserting Z4DAT.ZAP.15	 (20784 bytes)
+ 21474	Inserting SYNTAX.ZAP.21	     (0 bytes)
+ 21474	Inserting MACROS.ZAP.21	   (117 bytes)
+ 21591	Inserting CLOCK.ZAP.21	   (178 bytes)
+ 21769	Inserting MAIN.ZAP.21	  (2289 bytes)
+ 24058	Inserting GPARSER.ZAP.5	  (6898 bytes)
+ 30956	Inserting VERBS.ZAP.23	 (12130 bytes)
+ 43086	Inserting RECORD.ZAP.13	    (56 bytes)
+ 43142	Inserting GLOBALS.ZAP.22	  (2799 bytes)
+ 45941	Inserting TERROR.ZAP.20	  (4413 bytes)
+ 50354	Inserting STAIR.ZAP.20	  (5043 bytes)
+ 55397	Inserting MAGIC.ZAP.19	  (6509 bytes)
+ 61906	Inserting KNOT.ZAP.19	  (1368 bytes)
+ 63274	Inserting PURLOINED.ZAP.19	  (7343 bytes)
+ 70617	Inserting CASTLE.ZAP.19	  (6510 bytes)
+ 77127	Inserting TEMPLE.ZAP.18	  (3385 bytes)
+ 80512	Inserting GALLERY.ZAP.18	  (2162 bytes)
+ 82674	Inserting EGG.ZAP.17	  (1699 bytes)
+ 84373	Inserting SLEEP.ZAP.17	  (2358 bytes)
+ 86731	Inserting GEARS.ZAP.17	  (5826 bytes)
+ 92557	Inserting OUTSIDE.ZAP.17	  (3338 bytes)
+ 95895	Inserting Z4STR.ZAP.15	 (15231 bytes)
+255 objects.
+231 globals.
+723 word vocabulary.
+
+111126 bytes (109K).
+ 21474 bytes of preload.
+ 12653 bytes of impure.
+
+Outputting symbol tables

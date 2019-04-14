@@ -41,7 +41,6 @@
 <GLOBAL P-CONT <>>  
  
 <GLOBAL P-IT-OBJECT <>>
-<GLOBAL P-IT-LOC <>>
 
 ;"Orphan flag" 
  
@@ -635,7 +634,7 @@ or creatures." CR>
 				     <TELL "the ">)>
 			      <COND (<OR ,P-OFLAG ,P-MERGED> <PRINTB .WRD>)
 				    (<AND <==? .WRD ,W?IT>
-					  <==? ,P-IT-LOC ,HERE>>
+					  <ACCESSIBLE? ,P-IT-OBJECT>>
 				     <PRINTD ,P-IT-OBJECT>)
 				    (T
 				     <WORD-PRINT <GETB .BEG 2>
@@ -993,6 +992,8 @@ or creatures." CR>
 		        <RETURN>)>>>
 
 
+<GLOBAL LAST-PSEUDO-LOC <>>
+
 <ROUTINE GLOBAL-CHECK (TBL "AUX" LEN RMG RMGL (CNT 0) OBJ OBITS FOO) 
 	#DECL ((TBL) TABLE (RMG) <OR FALSE TABLE> (RMGL CNT) FIX (OBJ) OBJECT)
 	<SET LEN <GET .TBL ,P-MATCHLEN>>
@@ -1008,6 +1009,7 @@ or creatures." CR>
 	       <SET CNT 0>
 	       <REPEAT ()
 		       <COND (<==? ,P-NAM <GET .RMG <* .CNT 2>>>
+			      <SETG LAST-PSEUDO-LOC ,HERE>
 			      <PUTP ,PSEUDO-OBJECT
 				    ,P?ACTION
 				    <GET .RMG <+ <* .CNT 2> 1>>>
@@ -1086,7 +1088,13 @@ or creatures." CR>
 			<COND (<L? <SET PTR <- .PTR 1>> 0> <RETURN>)
 			      (T
 			       <SET OBJ <GET .TBL <+ .PTR 1>>>
-			       <COND (<==? .OBJ ,IT> <SET OBJ ,P-IT-OBJECT>)>
+			       <COND (<==? .OBJ ,IT>
+				      <COND (<NOT <ACCESSIBLE? ,P-IT-OBJECT>>
+					     <TELL
+"I don't see what you're referring to." CR>
+					     <RFALSE>)
+					    (T
+					     <SET OBJ ,P-IT-OBJECT>)>)>
 			       <COND (<NOT <IN? .OBJ ,WINNER>>
 				      <SETG PRSO .OBJ>
 				      <COND (<FSET? .OBJ ,TRYTAKEBIT>
@@ -1186,3 +1194,40 @@ or creatures." CR>
 		    <==? <GET <SET PTR <GET ,P-ITBL ,P-NC2>> 0> ,W?IT>>
 		<TELL " " D ,PRSO>)
 	       (T <BUFFER-PRINT .PTR <GET ,P-ITBL ,P-NC2L> <>>)>>
+
+<ROUTINE ACCESSIBLE? (OBJ "AUX" (L <LOC .OBJ>)) ;"can player TOUCH object?"
+	 ;"revised 5/2/84 by SEM and SWG"
+	 <COND (<FSET? .OBJ ,INVISIBLE>
+		<RFALSE>)
+	       ;(<EQUAL? .OBJ ,PSEUDO-OBJECT>
+		<COND (<EQUAL? ,LAST-PSEUDO-LOC ,HERE>
+		       <RTRUE>)
+		      (T
+		       <RFALSE>)>)
+	       (<NOT .L>
+		<RFALSE>)
+	       (<EQUAL? .L ,GLOBAL-OBJECTS>
+		<RTRUE>)
+	       (<AND <EQUAL? .L ,LOCAL-GLOBALS>
+		     <GLOBAL-IN? .OBJ ,HERE>>
+		<RTRUE>)
+	       (<NOT <EQUAL? <META-LOC .OBJ> ,HERE <LOC ,WINNER>>>
+		<RFALSE>)
+	       (<EQUAL? .L ,WINNER ,HERE <LOC ,WINNER>>
+		<RTRUE>)
+	       (<AND <FSET? .L ,OPENBIT>
+		     <ACCESSIBLE? .L>>
+		<RTRUE>)
+	       (T
+		<RFALSE>)>>
+
+<ROUTINE META-LOC (OBJ)
+	 <REPEAT ()
+		 <COND (<NOT .OBJ>
+			<RFALSE>)
+		       (<IN? .OBJ ,GLOBAL-OBJECTS>
+			<RETURN ,GLOBAL-OBJECTS>)>
+		 <COND (<IN? .OBJ ,ROOMS>
+			<RETURN .OBJ>)
+		       (T
+			<SET OBJ <LOC .OBJ>>)>>>

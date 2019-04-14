@@ -273,7 +273,7 @@ senseless, and return, the last closing the door behind it.">>
       (GLOBAL ADVENTURER-LG MIRROR MIRROR-STUFF SHARDS)>
 
 <OBJECT GLOBAL-ADVENTURER
-	(IN GLOBAL-OBJECTS)
+	;(IN GLOBAL-OBJECTS)
 	(SYNONYM ADVENTURER)
 	(DESC "adventurer")
 	(ACTION GLOBAL-ADVENTURER-F)
@@ -375,6 +375,9 @@ underground labyrinth, filled with tunnels, caves, and peculiar rock
 formations." CR>)>
 		<COND (,ADVENTURER-LOC
 		       <DESCRIBE-ADVENTURER>)>)
+	       (<EQUAL? .RARG ,M-ENTER>
+		<MOVE ,GLOBAL-ADVENTURER ,GLOBAL-OBJECTS>
+		<RFALSE>)
 	       (<AND <EQUAL? .RARG ,M-END>
 		     <NOT <FSET? ,HERE ,NDESCBIT>>
 		     <NOT ,ADVENTURER-SUMMONED>

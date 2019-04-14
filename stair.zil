@@ -364,7 +364,7 @@ of your death.")
 	(ACTION GLOBAL-KRILL-F)>
 
 <ROUTINE GLOBAL-KRILL-F ()
-	 <COND (<VERB? GUNCHO HELLO>
+	 <COND (<VERB? GUNCHO HELLO GIVE>
 		<TELL
 "Krill is not here, and lucky for you." CR>)
 	       (<VERB? ZIFMIA>
@@ -518,7 +518,7 @@ ponder the infinite, beyond all help and hope!" CR>
 "Krill recoils as he hears the first words of the guncho spell. For a few
 seconds he continues with the spell he was casting, trying to finish before
 you. He fumbles some syllables! Then he steps
-back and, with his hands outstretched toward you, lets out a blood-curdling
+back and, with his hands outstretched toward you, lets out a bloodcurdling
 scream. His face twisted, and his body vibrating with the effort of resisting
 the enchantment, he utters a spell
 of power, and is gone! After a quiet moment, a rumble begins deep in the

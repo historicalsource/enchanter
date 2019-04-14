@@ -1,0 +1,1082 @@
+
+Combined ZIL Compiler Ver 2.0 (MIM)
+-----------------------------------
+Input file: SS:<ENCHANTER>Z4.ZIL.4
+Input file: SS:<ENCHANTER>SYNTAX.ZIL.122
+Input file: SS:<ENCHANTER>MACROS.ZIL.22
+Compiling routine: PRINTA
+Compiling routine: RANDOM-ELEMENT
+Compiling routine: PICK-ONE
+Input file: SS:<ENCHANTER>CLOCK.ZIL.3
+Compiling routine: QUEUE
+Compiling routine: INT
+Compiling routine: CLOCKER
+Input file: SS:<ENCHANTER>MAIN.ZIL.86
+Compiling routine: GO
+Compiling routine: MAIN-LOOP
+Compiling routine: MAIN-LOOP-1
+Compiling routine: PERFORM
+Compiling routine: I-TIME
+Input file: SS:<ENCHANTER>GPARSER.ZIL.9
+Compiling routine: PARSER
+Compiling routine: STUFF
+Compiling routine: INBUF-STUFF
+Compiling routine: INBUF-ADD
+Compiling routine: WT?
+Compiling routine: CLAUSE
+Compiling routine: NUMBER?
+Compiling routine: ORPHAN-MERGE
+Compiling routine: ACLAUSE-WIN
+Compiling routine: NCLAUSE-WIN
+Compiling routine: WORD-PRINT
+Compiling routine: UNKNOWN-WORD
+Compiling routine: CANT-USE
+Compiling routine: SYNTAX-CHECK
+Compiling routine: CANT-ORPHAN
+Compiling routine: ORPHAN
+Compiling routine: THING-PRINT
+Compiling routine: BUFFER-PRINT
+Compiling routine: PREP-PRINT
+Compiling routine: CLAUSE-COPY
+Compiling routine: CLAUSE-ADD
+Compiling routine: PREP-FIND
+Compiling routine: SYNTAX-FOUND
+Compiling routine: GWIM
+Compiling routine: SNARF-OBJECTS
+Compiling routine: BUT-MERGE
+Compiling routine: SNARFEM
+Compiling routine: GET-OBJECT
+Compiling routine: MOBY-FIND
+Compiling routine: WHICH-PRINT
+Compiling routine: GLOBAL-CHECK
+Compiling routine: DO-SL
+Compiling routine: SEARCH-LIST
+Compiling routine: OBJ-FOUND
+Compiling routine: TAKE-CHECK
+Compiling routine: ITAKE-CHECK
+Compiling routine: MANY-CHECK
+Compiling routine: ZMEMQ
+Compiling routine: ZMEMQB
+Compiling routine: LIT?
+Compiling routine: PRSO-PRINT
+Compiling routine: PRSI-PRINT
+Compiling routine: THIS-IT?
+Compiling routine: ACCESSIBLE?
+Compiling routine: META-LOC
+Input file: SS:<ENCHANTER>VERBS.ZIL.245
+Compiling routine: V-VERBOSE
+Compiling routine: V-BRIEF
+Compiling routine: V-SUPER-BRIEF
+Compiling routine: V-LOOK
+Compiling routine: V-FIRST-LOOK
+Compiling routine: V-EXAMINE
+Compiling routine: DESCRIBE-ROOM
+ ** Note: Non-predicate jump flushed FSET
+Compiling routine: DESCRIBE-OBJECTS
+Compiling routine: LIGHTED?
+Compiling routine: DESCRIBE-OBJECT
+Compiling routine: PRINT-CONT
+Compiling routine: FIRSTER
+Compiling routine: V-SCORE
+Compiling routine: FINISH
+Compiling routine: V-QUIT
+ ** Note: Non-predicate jump flushed PRINTI
+Compiling routine: YES?
+Compiling routine: V-VERSION
+Compiling routine: JIGS-UP
+Compiling routine: RANDOMIZE-OBJECTS
+Compiling routine: KILL-INTERRUPTS
+Compiling routine: V-RESTORE
+Compiling routine: V-SAVE
+Compiling routine: V-RESTART
+Compiling routine: V-WALK-AROUND
+Compiling routine: USE-DIRECTIONS
+Compiling routine: V-LAUNCH
+Compiling routine: V-WALK
+Compiling routine: THIS-IS-IT
+Compiling routine: V-INVENTORY
+Compiling routine: PRE-TAKE
+Compiling routine: V-TAKE
+Compiling routine: ITAKE
+Compiling routine: V-PUT-ON
+Compiling routine: PRE-PUT
+Compiling routine: V-PUT
+Compiling routine: PRE-GIVE
+Compiling routine: PRE-SGIVE
+Compiling routine: HELD?
+Compiling routine: V-GIVE
+Compiling routine: V-SGIVE
+Compiling routine: V-DROP
+Compiling routine: V-THROW
+Compiling routine: IDROP
+Compiling routine: V-OPEN
+Compiling routine: PRINT-CONTENTS
+Compiling routine: V-CLOSE
+Compiling routine: CCOUNT
+Compiling routine: WEIGHT
+Compiling routine: V-SCRIPT
+Compiling routine: V-UNSCRIPT
+Compiling routine: PRE-MOVE
+Compiling routine: V-MOVE
+Compiling routine: V-LAMP-ON
+Compiling routine: V-LAMP-OFF
+Compiling routine: V-WAIT
+Compiling routine: V-WAIT-FOR
+Compiling routine: PRE-BOARD
+Compiling routine: V-BOARD
+Compiling routine: V-DISEMBARK
+Compiling routine: GOTO
+Compiling routine: WINNER-HAS-TREASURE?
+Compiling routine: V-BACK
+Compiling routine: V-POUR-ON
+Compiling routine: V-SPRAY
+Compiling routine: V-SSPRAY
+Compiling routine: V-SQUEEZE
+Compiling routine: PRE-OIL
+Compiling routine: V-OIL
+Compiling routine: V-ADVENT
+Compiling routine: V-DRINK
+Compiling routine: V-EAT
+Compiling routine: V-CURSES
+Compiling routine: V-LISTEN
+Compiling routine: V-FOLLOW
+Compiling routine: V-STAY
+Compiling routine: V-PRAY
+Compiling routine: V-LEAP
+Compiling routine: V-SKIP
+Compiling routine: V-LEAVE
+Compiling routine: V-HELLO
+Compiling routine: PRE-READ
+Compiling routine: V-READ
+Compiling routine: V-LOOK-UNDER
+Compiling routine: V-LOOK-BEHIND
+Compiling routine: V-LOOK-INSIDE
+Compiling routine: SEE-INSIDE?
+Compiling routine: V-REPENT
+Compiling routine: PRE-BURN
+Compiling routine: V-BURN
+Compiling routine: V-TURN
+Compiling routine: V-PUMP
+Compiling routine: V-INFLATE
+Compiling routine: V-DEFLATE
+Compiling routine: V-LOCK
+Compiling routine: V-PICK
+Compiling routine: V-UNLOCK
+Compiling routine: V-CUT
+Compiling routine: PRE-HIT
+Compiling routine: V-KILL
+Compiling routine: IKILL
+Compiling routine: V-ATTACK
+Compiling routine: V-SWING
+Compiling routine: V-KICK
+Compiling routine: V-WAVE
+Compiling routine: V-WAVE-AT
+Compiling routine: V-RAISE
+Compiling routine: V-LOWER
+Compiling routine: V-RUB
+Compiling routine: V-PUSH
+Compiling routine: V-PUSH-TO
+Compiling routine: V-MUNG
+Compiling routine: HACK-HACK
+Compiling routine: WORD-TYPE
+Compiling routine: V-KNOCK
+Compiling routine: V-YELL
+Compiling routine: V-PLUG
+Compiling routine: V-EXORCISE
+Compiling routine: V-SHAKE
+Compiling routine: PRE-DIG
+Compiling routine: V-DIG
+Compiling routine: V-SMELL
+Compiling routine: GLOBAL-IN?
+Compiling routine: V-SWIM
+Compiling routine: V-UNTIE
+Compiling routine: PRE-TIE
+Compiling routine: V-TIE
+Compiling routine: V-TIE-UP
+Compiling routine: V-MELT
+Compiling routine: V-MUMBLE
+Compiling routine: V-ALARM
+Compiling routine: V-ZORK
+Compiling routine: V-CLIMB-ON
+Compiling routine: V-CLIMB-FOO
+Compiling routine: V-CLIMB-UP
+Compiling routine: V-LIE-DOWN
+Compiling routine: V-CLIMB-DOWN
+Compiling routine: V-SEND
+Compiling routine: V-WIND
+Compiling routine: V-COUNT
+Compiling routine: V-PUT-UNDER
+Compiling routine: V-PLAY
+Compiling routine: V-ENTER
+Compiling routine: V-EXIT
+Compiling routine: V-CROSS
+Compiling routine: V-SEARCH
+Compiling routine: V-FIND
+Compiling routine: V-TELL
+Compiling routine: V-ANSWER
+Compiling routine: V-REPLY
+Compiling routine: V-KISS
+Compiling routine: V-RAPE
+Compiling routine: FIND-IN
+Compiling routine: V-SAY
+Compiling routine: V-SPIN
+Compiling routine: V-THROUGH
+Compiling routine: V-WEAR
+Compiling routine: V-THROW-OFF
+Compiling routine: V-$VERIFY
+Compiling routine: V-STAND
+Compiling routine: V-PUT-BEHIND
+Compiling routine: DO-WALK
+Compiling routine: V-WALK-TO
+Compiling routine: OTHER-SIDE
+Compiling routine: V-DRINK-FROM
+Compiling routine: V-LEAN-ON
+Compiling routine: V-MAKE-LINE-TO
+Compiling routine: V-MAKE-LINE
+Compiling routine: V-ERASE-LINE-TO
+Compiling routine: V-ERASE-LINE
+Compiling routine: 2OBJS?
+Compiling routine: V-REACH-IN
+Compiling routine: ROB
+Compiling routine: BLT
+Compiling routine: RIPOFF
+Compiling routine: V-POINT
+Compiling routine: V-ASK-FOR
+Compiling routine: V-THANK
+Compiling routine: V-FILL
+Compiling routine: V-ESCAPE
+Compiling routine: V-WRITE-WITH
+Compiling routine: WRITE-HINT
+Compiling routine: V-WRITE-ON
+Compiling routine: V-AVOID
+Compiling routine: V-SHOW
+Compiling routine: PRE-SSHOW
+Compiling routine: V-SSHOW
+Compiling routine: PRE-BRING
+Compiling routine: V-BRING
+Compiling routine: V-DRAW-ON
+Compiling routine: V-SHARPEN
+Compiling routine: V-FORGET
+Compiling routine: PRE-FLY
+Compiling routine: V-HIDE
+Compiling routine: V-CHASTISE
+Compiling routine: V-GAG
+Compiling routine: V-GROSS-OUT
+Compiling routine: V-WHO
+Input file: SS:<ENCHANTER>RECORD.ZIL.1
+Compiling routine: V-$COMMAND
+Compiling routine: V-$RANDOM
+Compiling routine: V-$RECORD
+Compiling routine: V-$UNRECORD
+Input file: SS:<ENCHANTER>GLOBALS.ZIL.139
+Compiling routine: NULL-F
+Compiling routine: GROUND-F
+Compiling routine: CORRIDOR-F
+Compiling routine: WALLS-F
+Compiling routine: CRETIN
+Compiling routine: WINDOW-F
+Compiling routine: SEA-F
+Compiling routine: FOREST-F
+Compiling routine: TEMPLE-OBJ-F
+Compiling routine: COURTYARD-F
+Compiling routine: TOWER-F
+Compiling routine: JUG-F
+Compiling routine: WATER-FUNCTION
+Compiling routine: SKY-F
+Compiling routine: NOT-HERE-OBJECT-F
+Compiling routine: FIND-NOT-HERE
+Compiling routine: GLOBAL-NOT-HERE-PRINT
+Compiling routine: NOT-HERE-PRINT
+Compiling routine: BELBOZ-F
+Compiling routine: GLOBAL-ROOM-F
+Compiling routine: BRAMBLES-F
+Compiling routine: GLOBAL-HOLE-F
+Input file: SS:<ENCHANTER>TERROR.ZIL.184
+Compiling routine: TERROR-F
+Compiling routine: TMAP-F
+Compiling routine: PENCIL-F
+Compiling routine: BLACK-PASSAGE-F
+Compiling routine: TMAZE-F
+Compiling routine: END-OF-WORLD
+Compiling routine: DRAW-TMAZE
+Compiling routine: FIXED-FONT-ON
+Compiling routine: FIXED-FONT-OFF
+Compiling routine: CN
+Compiling routine: ECN
+Compiling routine: CONNECT
+Compiling routine: DISCONNECT
+Compiling routine: DESCRIBE-NEW-EXIT
+Compiling routine: CONNECTED?
+Compiling routine: I-TERROR
+Compiling routine: TNULL-F
+Compiling routine: TWALK
+Compiling routine: TWALK1
+Compiling routine: PATH-OUT?
+Compiling routine: LEGEND-BOOK-F
+Compiling routine: LEGEND-TWO-F
+Input file: SS:<ENCHANTER>STAIR.ZIL.131
+Compiling routine: LANDING-EXIT-F
+Compiling routine: ADVENTURER-DROPS-OUT
+Compiling routine: STAIRS-F
+Compiling routine: STAIR-DISPEL
+Compiling routine: ENDLESS-UP
+Compiling routine: ENDLESS-DOWN
+Compiling routine: ENDLESS-UP-DOWN
+Compiling routine: ENDLESS-STAIR-F
+Compiling routine: ENDLESS-EXIT-F
+Compiling routine: STAIR-TO-TABLE
+Compiling routine: TABLE-TO-STAIR
+Compiling routine: REAL-STAIR-EXIT-F
+Compiling routine: PIT-EXIT-F
+Compiling routine: PIT-F
+Compiling routine: STOP-FLYING
+Compiling routine: I-FALL
+Compiling routine: I-FALL-FOREVER
+Compiling routine: DESTROY-ALL
+Compiling routine: REMOVE-ALL
+Compiling routine: WARLOCK-TOWER-F
+Compiling routine: GLOBAL-KRILL-F
+Compiling routine: DRAGON-F
+Compiling routine: SECOND-ACT
+Compiling routine: I-DRAGON
+Compiling routine: SHAPE-F
+Compiling routine: THIRD-ACT
+Compiling routine: I-SHAPE
+Compiling routine: I-BYE
+Compiling routine: KRILL-F
+Compiling routine: I-MUNG-ROOM
+Input file: SS:<ENCHANTER>MAGIC.ZIL.277
+Compiling routine: V-SPELLS
+Compiling routine: SPELL-TIMES
+Compiling routine: SPELL-PRINT
+Compiling routine: SPELL-BOOK-F
+Compiling routine: SPELL-CHECK
+Compiling routine: PRE-QUICK-CAST
+ ** Note: Atomic argument to routine assumed constant - MORE-PROBE
+
+Compiling routine: SCROLL-F
+Compiling routine: SPELL-F
+Compiling routine: FORGET-SPELL
+Compiling routine: FORGET-ALL
+Compiling routine: V-CAST
+Compiling routine: V-LEARN
+Compiling routine: V-MEMORIZE
+Compiling routine: V-GNUSTO
+Compiling routine: MORE-PROBE
+Compiling routine: V-FROTZ
+Compiling routine: V-OZMOO
+Compiling routine: I-DEATH-CHEATED-END
+Compiling routine: V-ZIFMIA
+Compiling routine: NO-ZIF
+Compiling routine: V-VAXUM
+Compiling routine: V-GONDAR
+Compiling routine: V-REZROV
+Compiling routine: I-TALK-TO-ANIMAL
+Compiling routine: V-NITFOL
+Compiling routine: I-HASTE
+Compiling routine: V-EXEX
+Compiling routine: V-KULCAD
+Compiling routine: V-MELBOR
+Compiling routine: V-BLORB
+Compiling routine: STRONG-BOX-F
+Compiling routine: V-GUNCHO
+Compiling routine: V-KREBF
+Compiling routine: V-CLEESH
+Compiling routine: V-IZYUK
+Compiling routine: I-FLY
+Compiling routine: V-FILFRE
+Input file: SS:<ENCHANTER>KNOT.ZIL.51
+Compiling routine: JEWELLED-BOX-A
+Compiling routine: JEWELLED-BOX-F
+Compiling routine: MAGIC-ROPE-F
+Compiling routine: ROPE-DISSOLVES
+Compiling routine: MAGIC-KNIFE-F
+Input file: SS:<ENCHANTER>PURLOINED.ZIL.185
+Compiling routine: MAPS-F
+Compiling routine: ENTHARION-F
+Compiling routine: GLOBE-F
+Compiling routine: PEDESTAL-F
+Compiling routine: PURLOINED-ROOM-F
+Compiling routine: DOOR-ILLUSION-F
+Compiling routine: MIRROR-F
+Compiling routine: SHARDS-F
+Compiling routine: MIRROR-HALL-F
+Compiling routine: MIRROR-STUFF-F
+Compiling routine: NO-MORE-ADVENTURER
+Compiling routine: I-LG-ADVENTURER
+Compiling routine: DESCRIBE-ADVENTURER
+Compiling routine: GLOBAL-ADVENTURER-F
+Compiling routine: ADVENTURER-LG-F
+Compiling routine: ADVENTURER-C
+Compiling routine: ADVENTURER-D
+Compiling routine: SWORD-F
+Compiling routine: ADVENTURER-ACTOR
+Compiling routine: ADVENTURER-F
+Compiling routine: I-ADVENTURER-UNCHARM
+Compiling routine: I-ADVENTURER
+Compiling routine: MOVE-ADVENTURER
+Compiling routine: DOOR-FROM?
+Compiling routine: ADVENTURER-TAKE
+Compiling routine: DIR-FROM
+Compiling routine: DIR-PRINT
+Compiling routine: ADVENTURER-DECIDE
+Compiling routine: NEXT-HALL
+Compiling routine: TREASURE-HERE?
+Compiling routine: PURLOINED-ROOM-A
+Compiling routine: NO-ILLUSIONS
+Input file: SS:<ENCHANTER>CASTLE.ZIL.234
+Compiling routine: INSIDE-GATE-F
+Compiling routine: IRON-GATE-F
+Compiling routine: ARCH-F
+Compiling routine: BED-F
+Compiling routine: BEDPOST-F
+Compiling routine: COMPARTMENT-F
+Compiling routine: BEDPOST-BUTTON-F
+Compiling routine: CELL-F
+Compiling routine: NORTH-CELL-F
+Compiling routine: CELL-DOOR-F
+Compiling routine: STONE-WALL-F
+Compiling routine: NORTH-BLOCK-F
+Compiling routine: SECRET-PASSAGE-F
+Compiling routine: SOUTH-GATE-F
+Compiling routine: BANQUET-STUFF-F
+Compiling routine: BANQUET-ILLUSION-F
+Compiling routine: BANQUET-FOOD-F
+Compiling routine: GUARD-WARNING-F
+Compiling routine: I-GUARDS-ARRIVE
+Compiling routine: I-GANG
+Compiling routine: GANG-OF-FOUR-F
+Compiling routine: LITTER-F
+Compiling routine: RAT-NEST-F
+Compiling routine: OVEN-F
+Compiling routine: HEAP-F
+Compiling routine: JUNCTION-F
+Compiling routine: ADV-VS-GANG
+Compiling routine: SKELETON-F
+Compiling routine: VOICES-F
+Compiling routine: TUBES-PSEUDO
+Compiling routine: ASHES-PSEUDO
+Compiling routine: RAT-TRACKS-F
+Compiling routine: RAT-HOLE-F
+Compiling routine: NORTH-GATE-OBJ-F
+Compiling routine: FOREST-1-F
+Compiling routine: SWAMP-F
+Compiling routine: SWAMP-PSEUDO
+Compiling routine: FROG-F
+Compiling routine: LILY-PAD-F
+Input file: SS:<ENCHANTER>TEMPLE.ZIL.78
+Compiling routine: ALTAR-PSEUDO
+Compiling routine: STATUE-F
+Compiling routine: GANG-OF-N-F
+Compiling routine: GUARDS-F
+Compiling routine: TOWER-DOOR-F
+Compiling routine: TOWER-S-F
+Compiling routine: CELL-PSEUDO
+Compiling routine: TEMPLE-F
+Compiling routine: TAKE-TO-TOWER
+Compiling routine: I-TAKE-TO-ALTAR
+Compiling routine: I-LETTER-OF-TRANSIT
+Input file: SS:<ENCHANTER>GALLERY.ZIL.40
+Compiling routine: GALLERY-A
+Compiling routine: GALLERY-F
+Compiling routine: DESCRIBE-PORTRAIT-GALLERY
+Compiling routine: PORTRAITS-F
+Compiling routine: FLATHEAD-PORTRAIT-F
+Compiling routine: FROBOZZ-PORTRAIT-F
+Compiling routine: LIGHTED-PORTRAIT-F
+Compiling routine: PORTRAIT-NICHE-F
+Compiling routine: ETERNAL-FLAME-F
+Input file: SS:<ENCHANTER>EGG.ZIL.48
+Compiling routine: JEWEL-CHESTS-F
+Compiling routine: EGG-KNOB-STATE
+Compiling routine: EGG-F
+Compiling routine: EGG-KNOB-F
+Compiling routine: SCRAMBLED-EGG-F
+Compiling routine: DAMAGED-SCROLL-F
+Input file: SS:<ENCHANTER>SLEEP.ZIL.85
+Compiling routine: V-TIME
+Compiling routine: GLOBAL-SLEEP-F
+Compiling routine: I-THIRST
+Compiling routine: I-HUNGER
+Compiling routine: I-TIRED
+Compiling routine: V-DIAGNOSE
+Compiling routine: V-SLEEP
+Input file: SS:<ENCHANTER>GEARS.ZIL.159
+Compiling routine: MACHINERY-F
+Compiling routine: ENGINE-ROOM-F
+Compiling routine: HAMMER-F
+Compiling routine: SE-TOWER-F
+Compiling routine: LIGHTS-F
+Compiling routine: I-CRASH
+Compiling routine: CROSS-ENGINE-ROOM
+Compiling routine: RECROSS-ENGINE-ROOM
+Compiling routine: WAVES-F
+Compiling routine: SEA-STUFF-F
+Compiling routine: NO-RESPONSE
+Compiling routine: TURTLE-F
+Compiling routine: TURTLE-THANKS
+Compiling routine: OPPOSITE-SIDES?
+Compiling routine: I-TURTLE
+Compiling routine: TURTLE-TIRES
+Input file: SS:<ENCHANTER>OUTSIDE.ZIL.130
+Compiling routine: WEST-CASTLE-F
+Compiling routine: UNDERGROWTH-F
+Compiling routine: PATH-SIGN-F
+Compiling routine: FOUNDATION-F
+Compiling routine: DISTANT-CASTLE-F
+Compiling routine: SHACK-OBJ-F
+Compiling routine: BATTERED-LANTERN-F
+Compiling routine: SHACK-STUFF
+Compiling routine: SHACK-OVEN-F
+Compiling routine: BREAD-F
+Compiling routine: TREES-F
+Compiling routine: HOVEL-F
+Compiling routine: HOVEL-KLUDGE
+Compiling routine: GLOBAL-CRONE-F
+Compiling routine: LONG-ROAD-F
+Compiling routine: FARM-PSEUDO
+Compiling routine: LONG-ROAD-SIGN-F
+Compiling routine: LONG-ROAD-EXIT-F
+Compiling routine: ROAD-TO-TABLE
+Compiling routine: TABLE-TO-ROAD
+Compiling routine: ROAD-F
+Compiling routine: HILLS-F
+Compiling routine: MOUNTAIN-F
+Compiling routine: OUTSIDE?
+Compiling routine: I-SCURRY
+Compiling routine: GLIMPSE-F
+ ** Warning: Word "THROUGH" has two TPREP meanings: PR?THROUGH and PR?WITH
+
+ ** Warning: Word "EXIT" has two TVERB meanings: ACT?EXIT and ACT?DROP
+
+ ** Note: OBJECT has no properties: GLOBAL-OBJECTS
+Vocabulary: 723
+Prepositions: 19
+	 OFF
+	 ON
+	 IN
+	 TO
+	 WITH
+	 THROUGH
+	 UNDER
+	 DOWN
+	 UP
+	 BEHIND
+	 AROUND
+	 FOR
+	 ACROSS
+	 OVER
+	 AT
+	 AWAY
+	 OUT
+	 FROM
+Objects: 255
+	 FROG
+	 NW-TOWER
+	 COURTYARD-2
+	 COURTYARD-3
+	 COURTYARD-4
+	 COURTYARD-5
+	 COURTYARD-6
+	 COURTYARD-7
+	 TEMPLE
+	 TOWER-N-DOOR
+	 TOWER-S-DOOR
+	 STATUE
+	 GANG-OF-N
+	 ALTAR
+	 TOWER-N
+	 GUARDS
+	 TOWER-S
+	 GALLERY
+	 PORTRAITS
+	 FLATHEAD-PORTRAIT
+	 FROBOZZ-PORTRAIT
+	 LIGHTED-PORTRAIT
+	 ETERNAL-FLAME
+	 JEWEL-ROOM
+	 MOUNTAIN
+	 JEWEL-CHESTS
+	 EGG
+	 EGG-KNOB-1
+	 EGG-KNOB-2
+	 EGG-KNOB-3
+	 EGG-KNOB-4
+	 EGG-KNOB-5
+	 SCRAMBLED-EGG
+	 DAMAGED-SCROLL
+	 GLOBAL-SLEEP
+	 ENGINE-ROOM
+	 MACHINERY
+	 LIGHTS
+	 SWITCHES
+	 MEADOW
+	 HEATHER
+	 BEACH
+	 SEA-STUFF
+	 TURTLE
+	 GLOBAL-TURTLE
+	 WEST-CASTLE
+	 WESTERN-ROAD
+	 DISTANT-CASTLE
+	 EAST-FORK
+	 TRAIL-HEAD
+	 UNDERGROWTH
+	 PATH-SIGN
+	 SHADY-BROOK
+	 FOUNDATION
+	 SHACK-EAST
+	 SHACK-ROOM
+	 SHACK-OBJ
+	 BATTERED-LANTERN
+	 SHACK-OVEN
+	 BREAD
+	 WEST-FORK
+	 DUSTY-ROAD
+	 HAIRPIN-LOOP
+	 VILLAGE
+	 HOVEL
+	 MOUNTAIN-TRAIL
+	 VISTA
+	 GLOBAL-CRONE
+	 VILLAGE-EAST
+	 LONG-ROAD
+	 LONG-ROAD-SIGN
+	 ROAD
+	 GLIMPSE-1
+	 GLIMPSE-2
+	 GLOBAL-KRILL
+	 DIM-DESCENT
+	 PSEUDO-OBJECT
+	 ENTHARION
+	 SHAPE
+	 SUMMON-SCROLL
+	 SHACK
+	 INSIDE-GATE
+	 ADVENTURER-LG
+	 REPAIR-SPELL
+	 T-A
+	 OPEN-SPELL
+	 POINT-B
+	 NEWT-SCROLL
+	 BANISH-SCROLL
+	 IRON-GATE
+	 T-E
+	 DOOR-ILLUSION
+	 MIRROR-HALL-4
+	 SHARDS
+	 PROTECTION-SCROLL
+	 SWORD
+	 JEWELLED-BOX
+	 POINT-F
+	 PEBBLED-PATH
+	 BEACH-OBJ
+	 COURTYARD-1
+	 T-I
+	 CHARM-SPELL
+	 BRAMBLES
+	 SECRET-PASSAGE
+	 POINT-H
+	 RAT-HOLE
+	 PIT
+	 FLOATING-SIGN
+	 REPAIR-SCROLL
+	 POINT-J
+	 GLOBE
+	 CREDITS-SCROLL
+	 ARCH
+	 MIRROR-STUFF
+	 CEILING
+	 CHEAT-DEATH-SPELL
+	 STRONG-BOX-SPELL
+	 INTNUM
+	 DRAGON
+	 NOT-HERE-OBJECT
+	 GROUND
+	 WATER
+	 STRONG-BOX
+	 LANTERN
+	 T-B
+	 MIRROR-HALL-1
+	 CLOSET
+	 MAGIC-KNIFE
+	 STAIRS
+	 BEDROOM
+	 T-F
+	 PURLOINED-ROOM
+	 ENDLESS-STAIR
+	 TEMPLE-OBJ
+	 SUMMON-SPELL
+	 WARLOCK-TOWER
+	 PROTECTION-SPELL
+	 QUENCH-SCROLL
+	 DOOR-REALITY
+	 LEGEND-ONE
+	 LIBRARY
+	 SPELL-BOOK
+	 HASTE-SPELL
+	 COMPARTMENT
+	 GLOBAL-ROOM
+	 CHARM-SCROLL
+	 BED
+	 MONSTERS-1
+	 MONSTERS-2
+	 MEADOW-OBJ
+	 MONSTERS-3
+	 TOWER
+	 MIRROR
+	 MIRROR-HALL-2
+	 MAPS
+	 T-C
+	 LILY-PAD
+	 CHEAT-DEATH-SCROLL
+	 BEDPOST-BUTTON
+	 PORTRAIT-NICHE
+	 SEA
+	 GLOBAL-HOLE
+	 LANDING
+	 T-G
+	 KNOT-ROOM
+	 GLOBAL-ADVENTURER
+	 FOREST-1
+	 POINT-K
+	 PEDESTAL
+	 POINT-M
+	 TALK-TO-ANIMALS-SPELL
+	 BLACK-PASSAGE
+	 WALLS
+	 QUENCH-SPELL
+	 WRITE-MAGIC-SPELL
+	 IT
+	 FLY-SPELL
+	 WEST-HALL
+	 GLOBAL-OBJECTS
+	 SKY
+	 LEGEND-TWO
+	 DISPEL-SCROLL
+	 MIRROR-HALL-3
+	 POINT-P
+	 SW-TOWER
+	 CREDITS-SPELL
+	 LIGHT-SPELL
+	 LOCAL-GLOBALS
+	 T-D
+	 PLAYER
+	 NEWT-SPELL
+	 POINT-R
+	 KRILL
+	 REAL-STAIR
+	 TERROR
+	 ADVENTURER
+	 DISPEL-SPELL
+	 ROOMS
+	 TURRET
+	 HASTE-SCROLL
+	 T-H
+	 LAWN
+	 MAGIC-ROPE
+	 POINT-V
+	 OPEN-SCROLL
+	 FLY-SCROLL
+	 MAP-ROOM
+	 ME
+	 LEGEND-BOOK
+	 JUG
+	 IRON-GATE-CHAINS
+	 PENCIL
+	 WINDOW
+	 COURTYARD
+	 BELBOZ
+	 CORRIDOR
+	 BANISH-SPELL
+	 HILLS
+	 TMAP
+	 HANDS
+	 GLOBAL-WATER
+	 BEDPOST
+	 FOREST
+	 DUNGEON
+	 STONE-WALL
+	 NORTH-CELL-DOOR
+	 NORTH-CELL
+	 NORTH-BLOCK
+	 SILVER-SPOON
+	 SOUTH-GATE
+	 RUSTY-GATE
+	 EAST-HALL
+	 SE-TOWER
+	 VOICES
+	 BANQUET-HALL
+	 BANQUET-ILLUSION
+	 BTABLES
+	 BENCHES
+	 IMPLEMENTS
+	 FOOD
+	 CANDLES
+	 GANG-OF-FOUR
+	 KITCHEN
+	 LITTER
+	 RAT-NEST
+	 OVEN
+	 HEAP
+	 JUNCTION
+	 SKELETON
+	 RAT-TRACKS
+	 NORTH-GATE
+	 NORTH-GATE-OBJ
+	 TREES
+	 FOREST-2
+Properties: 29
+	 P?OUT
+	 P?IN
+	 P?UP
+	 P?DOWN
+	 P?SE
+	 P?SW
+	 P?NE
+	 P?NW
+	 P?WEST
+	 P?EAST
+	 P?SOUTH
+	 P?NORTH
+	 P?COUNT
+	 P?TMAZE
+	 P?POINT
+	 P?TEXT
+	 P?ADJECTIVE
+	 P?ACTION
+	 P?CAPACITY
+	 P?SIZE
+	 P?CONTFCN
+	 P?PSEUDO
+	 P?LDESC
+	 P?FDESC
+	 P?ADVFCN
+	 P?GLOBAL
+	 P?DESCFCN
+	 P?SYNONYM
+Globals: 224
+	 FROG-TALKS
+	 FROGGERS
+	 MUNG-ROOM-TABLE
+	 GUARDS-HEARD
+	 LOCKED-IN-TOWER
+	 ANYTHING-TAKEN
+	 SCROLLS-TAKEN
+	 SACRIFICED?
+	 DAGGER-SEEN
+	 LETTER-OF-TRANSIT
+	 PORTRAIT-COMMENT
+	 VISITED-GALLERY?
+	 LAST-SLEEP
+	 TIME-TABLE
+	 THIRST-COUNT
+	 THIRST-TABLE
+	 HUNGER-COUNT
+	 HUNGER-TABLE
+	 AWAKE
+	 HUNGER-TELL
+	 THIRST-TELL
+	 TIRED-TELL
+	 BED-WARNING
+	 DOOR-DREAM-2
+	 DOOR-DREAM
+	 GALLERY-DREAM
+	 MOLESTED
+	 MUNCHED
+	 DREAMS
+	 FAST?
+	 CRASH?
+	 HAMMER-EXEX
+	 TURTLE-FOLLOWS
+	 TF-COUNT
+	 TURTLE-REMARKS
+	 TURTLE-REPORT?
+	 TURTLE-TIRED?
+	 TURTLE-TIRED-TELL
+	 BREAD-EXAMINES
+	 BREAD-AMTS
+	 CRONE-MOVE
+	 SIGN-TBL
+	 ROAD-LOC
+	 ROAD-TABLE
+	 GLIMPSES
+	 NIGHT-GLIMPSES
+	 HALL-TBL
+	 ALL-SPELLS
+	 COPR-NOTICE
+	 P-NCN
+	 DOOR-POINT
+	 JUG-FILLS
+	 P-NOT-HERE
+	 ADVENTURER-MOVE
+	 FALL-COUNT
+	 TMAZE-ROOMS
+	 ERASER-TBL
+	 PROBE
+	 HELLOS
+	 P-CCTBL
+	 C-TABLE
+	 JUG-AMTS
+	 YUKS
+	 HO-HUM
+	 PATH-TBL
+	 TWALK-PATHS
+	 TERROR-ARRIVES
+	 MIRROR-HALL-TBL1
+	 ILLUSION-HACKS
+	 T-DIR-TABLE
+	 PENCIL-TBL
+	 OOPS-TABLE
+	 OOPS-INBUF
+	 P-INBUF
+	 RESERVE-LEXV
+	 AGAIN-LEXV
+	 P-LEXV
+	 P-MERGE
+	 P-BUTS
+	 P-PRSI
+	 ADVENTURER-NICE
+	 DIR-STRINGS
+	 ADVENTURER-QUIPS
+	 ADV-POSS
+	 POPS-OPEN
+	 ADVENTURER-LOITERS
+	 ADVENTURER-FEEBLES
+	 P-PRSO
+	 P-OVTBL
+	 P-VTBL
+	 P-OTBL
+	 P-ITBL
+	 P-OCLAUSE
+	 RANKINGS
+	 JUMPLOSS
+	 INDENTS
+	 NO-LONGER-PROTECTED
+	 STAIR-TABLE
+	 COUNTERS
+	 FORGET-TBL
+	 PROBE-TBL
+	 SIGN-TEXTS
+	 TMAZE-DIRS
+	 SAILOR?
+	 RESERVE-PTR
+	 PRSI
+	 DOOR-ILLUSION-GONE
+	 P-IT-OBJECT
+	 EAT-POINT
+	 SPELL-MAX
+	 TWALK-LEVEL
+	 AGAIN-DIR
+	 P-ADJN
+	 ROPE-MAGIC?
+	 WINNER
+	 P-OFLAG
+	 P-NUMBER
+	 SUMMON-POINT
+	 FUMBLE-PROB
+	 STAIR-SOLVED?
+	 TALK-TO-ANIMAL?
+	 P-GETFLAGS
+	 LOAD-MAX
+	 P-TABLE
+	 QUOTE-FLAG
+	 KRILL-KILL
+	 TOD
+	 TERROR-MOVED
+	 LIGHT-POINT
+	 P-WON
+	 DEATHS
+	 IMP-SEEN
+	 BELBOZ-WARNING
+	 SUNRISE
+	 L-PRSO
+	 ADVENTURER-SEEN
+	 P-ONEOBJ
+	 DUSK
+	 TTRIES
+	 DROPPED-SOME?
+	 P-AND
+	 STAIR-POINT
+	 REAL-SPELL-MAX
+	 TRY-FLY
+	 CASTLE-ENTER
+	 L-PRSA
+	 BOX-POINT
+	 PRSA
+	 P-AADJ
+	 TURTLE-POINT
+	 HASTED?
+	 ADV-OLD-LOC
+	 ADVENTURER-SUMMONED
+	 P-XADJ
+	 ADVENTURER-LOC
+	 ERASER-COUNT
+	 P-SYNTAX
+	 QUENCH-POINT
+	 C-DEMONS
+	 ENTRY-POINT
+	 P-GWIMBIT
+	 P-MERGED
+	 L-PRSI
+	 PSTART
+	 PRSO
+	 DEBUG
+	 STAIR-LOC
+	 EGG-POINT
+	 ADV-HASTE
+	 TEMPLE-POINT
+	 SPELL-ROOM
+	 SCORE-MAX
+	 LOAD-ALLOWED
+	 C-INTS
+	 P-LEN
+	 NIGHTFALL
+	 WARLOCK-POINT
+	 P-ADJ
+	 P-ACT
+	 TERROR-TRAPPED
+	 PENCIL-COUNT
+	 P-XADJN
+	 FLYING?
+	 LIT
+	 DESC-OBJECT
+	 FUMBLE-NUMBER
+	 REPAIR-POINT
+	 STRONG-BOX-FLAG
+	 DEATH-CHEATED
+	 P-CONT
+	 FLY-POINT
+	 LAST-PSEUDO-LOC
+	 PROTECTED-FROM-EVIL
+	 P-ANAM
+	 P-WALK-DIR
+	 DRINK-POINT
+	 P-MOBY-FOUND
+	 P-XNAM
+	 ADVENTURER-NOTES-DOOR
+	 ALWAYS-LIT
+	 P-NAM
+	 CHARM-POINT
+	 P-MULT
+	 CLOCK-WAIT
+	 DOOR-KULCAD
+	 ADVENTURER-STAY
+	 TERROR-POINT
+	 P-ADVERB
+	 P-MATCHLEN
+	 P-SLOCBITS
+	 BEATEN-UP
+	 P-ACLAUSE
+	 P-DIR
+	 ADVENTURER-CHARMED
+	 ADV-NEW-LOC
+	 VERBOSE
+	 LOSSAGE
+	 TWAIT
+	 SUPER-BRIEF
+	 P-END-ON-PREP
+	 DAWN
+	 GALLERY-POINT
+	 NORTH-BLOCK-FLAG
+	 GANG-FOLLOWS

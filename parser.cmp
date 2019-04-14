@@ -1,0 +1,1765 @@
+
+;COMPARISON OF SS:<ENCHANTER>PARSER.ZIL.70 AND SS:<ZORK1>GPARSER.ZIL.44
+;OPTIONS ARE    /3
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 1-1 (0)
+"PARSER for
+			      ENCHANTER
+	(c) Copyright 1983 Infocom, Inc.  All Rights Reserved.
+"
+"Parser global variable convention:  All parser globals will 
+  begin with 'P-'.  Local variables are not restricted in any
+  way.
+" 
+ 
+<SETG SIBREAKS ".,\"">
+ 
+<GLOBAL PRSA <>>
+ 
+<GLOBAL PRSI <>>
+<GLOBAL PRSO <>>
+<GLOBAL P-TABLE 0>  
+ 
+<GLOBAL P-ONEOBJ 0> 
+ 
+<GLOBAL P-SYNTAX 0> 
+ 
+<GLOBAL P-CCSRC 0>  
+ 
+<GLOBAL P-LEN 0>    
+ 
+<GLOBAL P-DIR 0>    
+ 
+<GLOBAL HERE 0>
+ 
+<GLOBAL WINNER 0>   
+ 
+<GLOBAL P-LEXV <ITABLE BYTE 120>>
+;"INBUF - Input buffer for READ"   
+ 
+<GLOBAL P-INBUF <ITABLE BYTE 100>>
+;"Parse-cont variable"  
+ 
+<GLOBAL P-CONT <>>  
+ 
+<GLOBAL P-IT-OBJECT <>>
+;"Orphan flag" 
+ 
+<GLOBAL P-OFLAG <>> 
+ 
+<GLOBAL P-MERGED <>>
+<GLOBAL P-ACLAUSE <>>    
+ 
+<GLOBAL P-ANAM <>>  
+ 
+<GLOBAL P-AADJ <>>
+;"Parser variables and temporaries"
+ 
+<CONSTANT P-PHRLEN 3>    
+ 
+<CONSTANT P-ORPHLEN 7>   
+ 
+<CONSTANT P-RTLEN 3>
+;"Byte offset to # of entries in LEXV"
+<CONSTANT P-LEXWORDS 1>
+;"Word offset to start of LEXV entries" 
+ 
+<CONSTANT P-LEXSTART 1>
+;"Number of words per LEXV entry"  
+ 
+<CONSTANT P-LEXELEN 2>   
+ 
+<CONSTANT P-WORDLEN 4>
+;"Offset to parts of speech byte"   
+ 
+<CONSTANT P-PSOFF 4>
+;"Offset to first part of speech"
+ 
+<CONSTANT P-P1OFF 5>
+;"First part of speech bit mask in PSOFF byte"  
+ 
+<CONSTANT P-P1BITS 3>    
+ 
+<CONSTANT P-ITBLLEN 9>   
+ 
+<GLOBAL P-ITBL <TABLE 0 0 0 0 0 0 0 0 0 0>>  
+ 
+<GLOBAL P-OTBL <TABLE 0 0 0 0 0 0 0 0 0 0>>  
+ 
+<GLOBAL P-VTBL <TABLE 0 0 0 0>>
+<GLOBAL P-NCN 0>    
+ 
+<CONSTANT P-VERB 0> 
+ 
+<CONSTANT P-VERBN 1>
+ 
+<CONSTANT P-PREP1 2>
+ 
+<CONSTANT P-PREP1N 3>    
+ 
+<CONSTANT P-PREP2 4>
+ 
+<CONSTANT P-PREP2N 5>    
+ 
+<CONSTANT P-NC1 6>  
+ 
+<CONSTANT P-NC1L 7> 
+ 
+<CONSTANT P-NC2 8>  
+ 
+<CONSTANT P-NC2L 9> 
+ 
+<GLOBAL QUOTE-FLAG <>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 1-1 (0)
+			"Generic PARSER file for
+			    The ZORK Trilogy
+		       started on 7/28/83 by MARC"
+;"WHICH and TRAP retrofixes installed"
+"Parser global variable convention:  All parser globals will
+  begin with 'P-'.  Local variables are not restricted in any
+  way.
+"
+<SETG SIBREAKS ".,\"">
+<GLOBAL PRSA <>>
+<GLOBAL PRSI <>>
+<GLOBAL PRSO <>>
+<GLOBAL P-TABLE 0>
+<GLOBAL P-ONEOBJ 0>
+<GLOBAL P-SYNTAX 0>
+<GLOBAL P-CCTBL <TABLE 0 0 0 0>>
+;"pointers used by CLAUSE-COPY (source/destination beginning/end pointers)"
+<CONSTANT CC-SBPTR 0>
+<CONSTANT CC-SEPTR 1>
+<CONSTANT CC-DBPTR 2>
+<CONSTANT CC-DEPTR 3>
+<GLOBAL P-LEN 0>
+<GLOBAL P-DIR 0>
+<GLOBAL HERE 0>
+<GLOBAL WINNER 0>
+<GLOBAL P-LEXV
+	<ITABLE 59 (LEXV) 0 #BYTE 0 #BYTE 0> ;<ITABLE BYTE 120>>
+<GLOBAL AGAIN-LEXV
+	<ITABLE 59 (LEXV) 0 #BYTE 0 #BYTE 0> ;<ITABLE BYTE 120>>
+<GLOBAL RESERVE-LEXV
+	<ITABLE 59 (LEXV) 0 #BYTE 0 #BYTE 0> ;<ITABLE BYTE 120>>
+<GLOBAL RESERVE-PTR <>>
+;"INBUF - Input buffer for READ"
+<GLOBAL P-INBUF
+	<ITABLE 120 (BYTE LENGTH) 0>
+	;<ITABLE BYTE 60>>
+<GLOBAL OOPS-INBUF
+	<ITABLE 120 (BYTE LENGTH) 0>
+	;<ITABLE BYTE 60>>
+<GLOBAL OOPS-TABLE <TABLE <> <> <> <>>>
+<CONSTANT O-PTR 0>	"word pointer to unknown token in P-LEXV"
+<CONSTANT O-START 1>	"word pointer to sentence start in P-LEXV"
+<CONSTANT O-LENGTH 2>	"byte length of unparsed tokens in P-LEXV"
+<CONSTANT O-END 3>	"byte pointer to first free byte in OOPS-INBUF"
+;"Parse-cont variable"
+<GLOBAL P-CONT <>>
+<GLOBAL P-IT-OBJECT <>>
+;<GLOBAL LAST-PSEUDO-LOC <>>
+;"Orphan flag"
+<GLOBAL P-OFLAG <>>
+<GLOBAL P-MERGED <>>
+<GLOBAL P-ACLAUSE <>>
+<GLOBAL P-ANAM <>>
+<GLOBAL P-AADJ <>>
+;"Parser variables and temporaries"
+;"Byte offset to # of entries in LEXV"
+<CONSTANT P-LEXWORDS 1> ;"Word offset to start of LEXV entries"
+<CONSTANT P-LEXSTART 1> ;"Number of words per LEXV entry"
+<CONSTANT P-LEXELEN 2>
+<CONSTANT P-WORDLEN 4> ;"Offset to parts of speech byte"
+<CONSTANT P-PSOFF 4> ;"Offset to first part of speech"
+<CONSTANT P-P1OFF 5> ;"First part of speech bit mask in PSOFF byte"
+<CONSTANT P-P1BITS 3>
+<CONSTANT P-ITBLLEN 9>
+<GLOBAL P-ITBL <TABLE 0 0 0 0 0 0 0 0 0 0>>
+<GLOBAL P-OTBL <TABLE 0 0 0 0 0 0 0 0 0 0>>
+<GLOBAL P-VTBL <TABLE 0 0 0 0>>
+<GLOBAL P-OVTBL <TABLE 0 #BYTE 0 #BYTE 0>>
+<GLOBAL P-NCN 0>
+<CONSTANT P-VERB 0>
+<CONSTANT P-VERBN 1>
+<CONSTANT P-PREP1 2>
+<CONSTANT P-PREP1N 3>
+<CONSTANT P-PREP2 4>
+<CONSTANT P-PREP2N 5>
+<CONSTANT P-NC1 6>
+<CONSTANT P-NC1L 7>
+<CONSTANT P-NC2 8>
+<CONSTANT P-NC2L 9>
+<GLOBAL QUOTE-FLAG <>>
+<GLOBAL P-END-ON-PREP <>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 2-56 (2115)
+   all required orphaning, syntax checking, and noun clause lookup."   
+<ROUTINE PARSER ("AUX" (PTR ,P-LEXSTART) WRD (VAL 0) (VERB <>)
+		       LEN (DIR <>) (NW 0) (LW 0) NUM SCNT (CNT -1)) 
+	<REPEAT ()
+		<COND (<G? <SET CNT <+ .CNT 1>> ,P-ITBLLEN> <RETURN>)
+		      (T <PUT ,P-ITBL .CNT 0>)>>
+	<SETG P-ADVERB <>>
+	<SETG P-MERGED <>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 1-107 (2815)
+   all required orphaning, syntax checking, and noun clause lookup."
+<ROUTINE PARSER ("AUX" (PTR ,P-LEXSTART) WRD (VAL 0) (VERB <>) (OF-FLAG <>)
+		       OWINNER OMERGED LEN (DIR <>) (NW 0) (LW 0) (CNT -1))
+	<REPEAT ()
+		<COND (<G? <SET CNT <+ .CNT 1>> ,P-ITBLLEN> <RETURN>)
+		      (T
+		       <COND (<NOT ,P-OFLAG>
+			      <PUT ,P-OTBL .CNT <GET ,P-ITBL .CNT>>)>
+		       <PUT ,P-ITBL .CNT 0>)>>
+	<SET OWINNER ,WINNER>
+	<SET OMERGED ,P-MERGED>
+	<SETG P-ADVERB <>>
+	<SETG P-MERGED <>>
+	<SETG P-END-ON-PREP <>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-14 (2637)
+	       <COND (<NOT <FSET? <LOC ,WINNER> ,VEHBIT>>
+		      <SETG HERE <LOC ,WINNER>>)>
+	       <SETG LIT <LIT? ,HERE>>)>
+	<COND (,P-CONT
+	       <SET PTR ,P-CONT>
+	       <COND (<AND <NOT ,SUPER-BRIEF> <==? ,PLAYER ,WINNER>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-20 (3521)
+	       <SETG HERE <META-LOC ,PLAYER>>
+	       ;<COND (<NOT <FSET? <LOC ,WINNER> ,VEHBIT>>
+		      <SETG HERE <LOC ,WINNER>>)>
+	       <SETG LIT <LIT? ,HERE>>)>
+	<COND (,RESERVE-PTR
+	       <SET PTR ,RESERVE-PTR>
+	       <STUFF ,RESERVE-LEXV ,P-LEXV>
+	       <COND (<AND <NOT ,SUPER-BRIEF> <EQUAL? ,PLAYER ,WINNER>>
+		      <CRLF>)>
+	       <SETG RESERVE-PTR <>>
+	       <SETG P-CONT <>>)
+	      (,P-CONT
+	       <SET PTR ,P-CONT>
+	       <COND (<AND <NOT ,SUPER-BRIEF>
+			   <EQUAL? ,PLAYER ,WINNER>
+			   <NOT <VERB? SAY>>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-32 (3248)
+	<COND (<0? ,P-LEN> <TELL "I beg your pardon?" CR> <RFALSE>)>
+	<SET LEN ,P-LEN>
+	<SETG P-DIR <>>
+	<SETG P-NCN 0>
+	<SETG P-GETFLAGS 0>
+	<REPEAT ()
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-48 (4443)
+	<COND (<ZERO? ,P-LEN> <TELL "I beg your pardon?" CR> <RFALSE>)>
+	<COND (<EQUAL? <SET WRD <GET ,P-LEXV .PTR>> ,W?OOPS>
+	       <COND (<EQUAL? <GET ,P-LEXV <+ .PTR ,P-LEXELEN>>
+			      ,W?PERIOD ,W?COMMA>
+		      <SET PTR <+ .PTR ,P-LEXELEN>>
+		      <SETG P-LEN <- ,P-LEN 1>>)>
+	       <COND (<NOT <G? ,P-LEN 1>>
+		      <TELL "I can't help your clumsiness." CR>
+		      <RFALSE>)
+		     (<GET ,OOPS-TABLE ,O-PTR>
+		      <COND (<AND <G? ,P-LEN 2>
+				  <EQUAL? <GET ,P-LEXV <+ .PTR ,P-LEXELEN>>
+					  ,W?QUOTE>>
+			     <TELL
+"Sorry, you can't correct mistakes in quoted text." CR>
+			     <RFALSE>)
+			    (<G? ,P-LEN 2>
+			     <TELL
+"Warning: only the first word after OOPS is used." CR>)>
+		      <PUT ,AGAIN-LEXV <GET ,OOPS-TABLE ,O-PTR>
+			   <GET ,P-LEXV <+ .PTR ,P-LEXELEN>>>
+		      <SETG WINNER .OWINNER> ;"maybe fix oops vs. chars.?"
+		      <INBUF-ADD <GETB ,P-LEXV <+ <* .PTR ,P-LEXELEN> 6>>
+				 <GETB ,P-LEXV <+ <* .PTR ,P-LEXELEN> 7>>
+				 <+ <* <GET ,OOPS-TABLE ,O-PTR> ,P-LEXELEN> 3>>
+		      <STUFF ,AGAIN-LEXV ,P-LEXV>
+		      <SETG P-LEN <GETB ,P-LEXV ,P-LEXWORDS>>
+		      <SET PTR <GET ,OOPS-TABLE ,O-START>>
+		      <INBUF-STUFF ,OOPS-INBUF ,P-INBUF>)
+		     (T
+		      <PUT ,OOPS-TABLE ,O-END <>>
+		      <TELL "There was no word to replace!" CR>
+		      <RFALSE>)>)
+	      (T
+	       <COND (<NOT <EQUAL? .WRD ,W?AGAIN ,W?G>>
+		      <SETG P-NUMBER 0>)>
+	       <PUT ,OOPS-TABLE ,O-END <>>)>
+	<COND (<EQUAL? <GET ,P-LEXV .PTR> ,W?AGAIN ,W?G>
+	       <COND (<ZERO? <GETB ,OOPS-INBUF 1>>
+		      <TELL "Beg pardon?" CR>
+		      <RFALSE>)
+		     (,P-OFLAG
+		      <TELL "It's difficult to repeat fragments." CR>
+		      <RFALSE>)
+		     (<NOT ,P-WON>
+		      <TELL "That would just repeat a mistake." CR>
+		      <RFALSE>)
+		     (<G? ,P-LEN 1>
+		      <COND (<OR <EQUAL? <GET ,P-LEXV <+ .PTR ,P-LEXELEN>>
+					,W?PERIOD ,W?COMMA ,W?THEN>
+				 <EQUAL? <GET ,P-LEXV <+ .PTR ,P-LEXELEN>>
+					,W?AND>>
+			     <SET PTR <+ .PTR <* 2 ,P-LEXELEN>>>
+			     <PUTB ,P-LEXV ,P-LEXWORDS
+				   <- <GETB ,P-LEXV ,P-LEXWORDS> 2>>)
+			    (T
+			     <TELL "I couldn't understand that sentence." CR>
+			     <RFALSE>)>)
+		     (T
+		      <SET PTR <+ .PTR ,P-LEXELEN>>
+		      <PUTB ,P-LEXV ,P-LEXWORDS
+			    <- <GETB ,P-LEXV ,P-LEXWORDS> 1>>)>
+	       <COND (<G? <GETB ,P-LEXV ,P-LEXWORDS> 0>
+		      <STUFF ,P-LEXV ,RESERVE-LEXV>
+		      <SETG RESERVE-PTR .PTR>)
+		     (T
+		      <SETG RESERVE-PTR <>>)>
+	       ;<SETG P-LEN <GETB ,AGAIN-LEXV ,P-LEXWORDS>>
+	       <SETG WINNER .OWINNER>
+	       <SETG P-MERGED .OMERGED>
+	       <INBUF-STUFF ,OOPS-INBUF ,P-INBUF>
+	       <STUFF ,AGAIN-LEXV ,P-LEXV>
+	       <SET CNT -1>
+	       <SET DIR ,AGAIN-DIR>
+	       <REPEAT ()
+		<COND (<IGRTR? CNT ,P-ITBLLEN> <RETURN>)
+		      (T <PUT ,P-ITBL .CNT <GET ,P-OTBL .CNT>>)>>)
+	      (T
+	       <STUFF ,P-LEXV ,AGAIN-LEXV>
+	       <INBUF-STUFF ,P-INBUF ,OOPS-INBUF>
+	       <PUT ,OOPS-TABLE ,O-START .PTR>
+	       <PUT ,OOPS-TABLE ,O-LENGTH <* 4 ,P-LEN>>
+	       <SET LEN
+		    <* 2 <+ .PTR <* ,P-LEXELEN <GETB ,P-LEXV ,P-LEXWORDS>>>>>
+	       <PUT ,OOPS-TABLE ,O-END <+ <GETB ,P-LEXV <- .LEN 1>>
+					  <GETB ,P-LEXV <- .LEN 2>>>>
+	       <SETG RESERVE-PTR <>>
+	       <SET LEN ,P-LEN>
+	       <SETG P-DIR <>>
+	       <SETG P-NCN 0>
+	       <SETG P-GETFLAGS 0>
+	       <REPEAT ()
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-43 (3570)
+		       <COND (<AND <==? .WRD ,W?TO>
+				   <EQUAL? .VERB ,ACT?TELL ;,ACT?ASK>>
+			      <SET WRD ,W?QUOTE>)
+			     (<AND <==? .WRD ,W?THEN>
+				   <NOT .VERB>
+				   <NOT ,QUOTE-FLAG> ;"Last NOT added 7/3">
+			      <PUT ,P-ITBL ,P-VERB ,ACT?TELL>
+			      <PUT ,P-ITBL ,P-VERBN 0>
+			      <SET WRD ,W?QUOTE>)>
+		       <COND ;(<AND <EQUAL? .WRD ,W?PERIOD>
+				   <EQUAL? .LW ,W?MRS ,W?MR ,W?MS>>
+			      <SET LW 0>)
+			     (<OR <EQUAL? .WRD ,W?THEN ,W?PERIOD>
+				  <EQUAL? .WRD ,W?QUOTE>> 
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-145 (7989)
+		       <COND (<ZERO? ,P-LEN> <SET NW 0>)
+			     (T <SET NW <GET ,P-LEXV <+ .PTR ,P-LEXELEN>>>)>
+		       <COND (<AND <EQUAL? .WRD ,W?TO>
+				   <EQUAL? .VERB ,ACT?TELL ;,ACT?ASK>>
+			      <SET WRD ,W?QUOTE>)
+			     (<AND <EQUAL? .WRD ,W?THEN>
+				   <G? ,P-LEN 0>
+				   <NOT .VERB>
+				   <NOT ,QUOTE-FLAG> ;"Last NOT added 7/3">
+			      <COND (<EQUAL? .LW 0 ,W?PERIOD>
+				     <SET WRD ,W?THE>)
+				    (ELSE
+				     <PUT ,P-ITBL ,P-VERB ,ACT?TELL>
+				     <PUT ,P-ITBL ,P-VERBN 0>
+				     <SET WRD ,W?QUOTE>)>)>
+		       <COND (<EQUAL? .WRD ,W?THEN ,W?PERIOD ,W?QUOTE>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-61 (4219)
+			      <OR <0? ,P-LEN>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-165 (8724)
+			      <OR <ZERO? ,P-LEN>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-69 (4443)
+				   <EQUAL? .VERB <> ,ACT?WALK ,ACT?FLY>
+				   <OR <==? .LEN 1>
+				       <AND <==? .LEN 2>
+					    <EQUAL? .VERB ,ACT?WALK ,ACT?FLY>>
+				       <AND <EQUAL? <SET NW
+						     <GET ,P-LEXV
+							  <+ .PTR ,P-LEXELEN>>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-173 (8951)
+				   <EQUAL? .VERB <> ,ACT?WALK>
+				   <OR <EQUAL? .LEN 1>
+				       <AND <EQUAL? .LEN 2>
+					    <EQUAL? .VERB ,ACT?WALK>>
+				       <AND <EQUAL? .NW
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-81 (4818)
+					    <==? .LEN 2>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-183 (9253)
+					    <EQUAL? .LEN 2>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-94 (5228)
+				   <NOT .VERB> ;<OR <NOT .VERB>
+				       <EQUAL? .VERB ,ACT?WHAT>>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-196 (9666)
+				   <NOT .VERB>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-101 (5479)
+						    <SET NUM
+							 <+ <* .PTR 2> 2>>>>
+			      <PUTB ,P-VTBL 3 <GETB ,P-LEXV <+ .NUM 1>>>)
+			     (<OR <SET VAL <WT? .WRD ,PS?PREPOSITION 0>>
+				  <AND <OR <EQUAL? .WRD ,W?ALL ,W?ONE ;,W?A>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-202 (9862)
+						    <SET CNT
+							 <+ <* .PTR 2> 2>>>>
+			      <PUTB ,P-VTBL 3 <GETB ,P-LEXV <+ .CNT 1>>>)
+			     (<OR <SET VAL <WT? .WRD ,PS?PREPOSITION 0>>
+				  <AND <OR <EQUAL? .WRD ,W?ALL ,W?ONE ;,W?BOTH>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-109 (5777)
+			      <COND (<AND <G? ,P-LEN 0>
+					  <==? <GET ,P-LEXV
+						    <+ .PTR ,P-LEXELEN>>
+					       ,W?OF>
+					  ;<NOT <EQUAL? .VERB ,ACT?ACCUSE>>
+					  <0? .VAL>
+					  <NOT
+					   <EQUAL? .WRD ,W?ALL ,W?ONE ,W?A>>>)
+				    (<AND <NOT <0? .VAL>>
+				          <OR <0? ,P-LEN>
+					      <EQUAL? <GET ,P-LEXV <+ .PTR 2>>
+						      ,W?THEN ,W?PERIOD>>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-210 (10163)
+			      <COND (<AND <G? ,P-LEN 1>
+					  <EQUAL? .NW ,W?OF>
+					  <ZERO? .VAL>
+					  <NOT <EQUAL? .WRD
+						       ,W?ALL ,W?ONE ,W?A>>
+					  ;<NOT <EQUAL? .WRD ,W?BOTH>>>
+				     <SET OF-FLAG T>)
+				    (<AND <NOT <ZERO? .VAL>>
+				          <OR <ZERO? ,P-LEN>
+					      <EQUAL? .NW ,W?THEN ,W?PERIOD>>>
+				     <SETG P-END-ON-PREP T>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-124 (6261)
+				    (<==? ,P-NCN 2>
+				     <TELL
+"I found too many nouns in that sentence." CR>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-224 (10630)
+				    (<EQUAL? ,P-NCN 2>
+				     <TELL
+"There were too many nouns in that sentence." CR>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-130 (6418)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-230 (10793)
+				     <SETG P-ACT .VERB>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-135 (6567)
+			     ;(<OR <EQUAL? .WRD ,W?CAREFULLY ,W?QUIETLY>
+				  <EQUAL? .WRD ,W?SLOWLY ,W?QUICKLY
+					        ,W?BRIEFLY>>
+			      <SETG P-ADVERB .WRD>)
+			     (<WT? .WRD ,PS?BUZZ-WORD>)
+			     (<AND <EQUAL? .VERB ,ACT?TELL>
+				   <WT? .WRD ,PS?VERB ,P1?VERB>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-236 (10971)
+			     (<EQUAL? .WRD ,W?OF>
+			      <COND (<OR <NOT .OF-FLAG>
+					 <EQUAL? .NW ,W?PERIOD ,W?THEN>>
+				     <CANT-USE .PTR>
+				     <RFALSE>)
+				    (T
+				     <SET OF-FLAG <>>)>)
+			     (<WT? .WRD ,PS?BUZZ-WORD>)
+			     (<AND <EQUAL? .VERB ,ACT?TELL>
+				   <WT? .WRD ,PS?VERB ,P1?VERB>
+				   <EQUAL? ,WINNER ,PLAYER>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-153 (7103)
+		<SET PTR <+ .PTR ,P-LEXELEN>>>
+	<COND (.DIR
+	       <SETG PRSA ,V?WALK>
+	       <COND (<EQUAL? .VERB ,ACT?FLY>
+		      <SETG TRY-FLY T>)
+		     (T
+		      <SETG TRY-FLY <>>)>
+	       <SETG PRSO .DIR>
+	       <SETG P-WALK-DIR .DIR>
+	       <RETURN T>)>
+	<SETG P-WALK-DIR <>>
+	<COND (,P-OFLAG <ORPHAN-MERGE>)>
+	;<COND (<==? <GET ,P-ITBL ,P-VERB> 0> <PUT ,P-ITBL ,P-VERB ,ACT?CALL>)>
+	<COND (<AND <SYNTAX-CHECK> <SNARF-OBJECTS> <TAKE-CHECK> <MANY-CHECK>>
+	       T)>>
+<GLOBAL TRY-FLY <>>
+<GLOBAL P-WALK-DIR <>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-258 (11580)
+		<SET PTR <+ .PTR ,P-LEXELEN>>>)>
+	<PUT ,OOPS-TABLE ,O-PTR <>>
+	<COND (.DIR
+	       <SETG PRSA ,V?WALK>
+	       <SETG PRSO .DIR>
+	       <SETG P-OFLAG <>>
+	       <SETG P-WALK-DIR .DIR>
+	       <SETG AGAIN-DIR .DIR>)
+	      (ELSE
+	       <COND (,P-OFLAG <ORPHAN-MERGE>)>
+	       <SETG P-WALK-DIR <>>
+	       <SETG AGAIN-DIR <>>
+	       <COND (<AND <SYNTAX-CHECK>
+			   <SNARF-OBJECTS>
+			   <MANY-CHECK>
+			   <TAKE-CHECK>>
+		      T)>)>>
+<GLOBAL P-ACT <>>
+<GLOBAL P-WALK-DIR <>>
+<GLOBAL AGAIN-DIR <>>
+;"For AGAIN purposes, put contents of one LEXV table into another."
+<ROUTINE STUFF (SRC DEST "OPTIONAL" (MAX 29) "AUX" (PTR ,P-LEXSTART) (CTR 1)
+						   BPTR)
+	 <PUTB .DEST 0 <GETB .SRC 0>>
+	 <PUTB .DEST 1 <GETB .SRC 1>>
+	 <REPEAT ()
+	  <PUT .DEST .PTR <GET .SRC .PTR>>
+	  <SET BPTR <+ <* .PTR 2> 2>>
+	  <PUTB .DEST .BPTR <GETB .SRC .BPTR>>
+	  <SET BPTR <+ <* .PTR 2> 3>>
+	  <PUTB .DEST .BPTR <GETB .SRC .BPTR>>
+	  <SET PTR <+ .PTR ,P-LEXELEN>>
+	  <COND (<IGRTR? CTR .MAX>
+		 <RETURN>)>>>
+;"Put contents of one INBUF into another"
+<ROUTINE INBUF-STUFF (SRC DEST "AUX" CNT)
+	 <SET CNT <- <GETB .SRC 0> 1>>
+	 <REPEAT ()
+		 <PUTB .DEST .CNT <GETB .SRC .CNT>>
+		 <COND (<DLESS? CNT 0> <RETURN>)>>>
+;"Put the word in the positions specified from P-INBUF to the end of
+OOPS-INBUF, leaving the appropriate pointers in AGAIN-LEXV"
+<ROUTINE INBUF-ADD (LEN BEG SLOT "AUX" DBEG (CTR 0) TMP)
+	 <COND (<SET TMP <GET ,OOPS-TABLE ,O-END>>
+		<SET DBEG .TMP>)
+	       (T
+		<SET DBEG <+ <GETB ,AGAIN-LEXV
+				   <SET TMP <GET ,OOPS-TABLE ,O-LENGTH>>>
+			     <GETB ,AGAIN-LEXV <+ .TMP 1>>>>)>
+	 <PUT ,OOPS-TABLE ,O-END <+ .DBEG .LEN>>
+	 <REPEAT ()
+	  <PUTB ,OOPS-INBUF <+ .DBEG .CTR> <GETB ,P-INBUF <+ .BEG .CTR>>>
+	  <SET CTR <+ .CTR 1>>
+	  <COND (<EQUAL? .CTR .LEN> <RETURN>)>>
+	 <PUTB ,AGAIN-LEXV .SLOT .DBEG>
+	 <PUTB ,AGAIN-LEXV <- .SLOT 1> .LEN>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 3-177 (7852)
+   for that part of speech to be returned." 
+<ROUTINE WT? (PTR BIT "OPTIONAL" (B1 5) "AUX" (OFFS ,P-P1OFF) TYP) 
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 2-322 (13698)
+   for that part of speech to be returned."
+<ROUTINE WT? (PTR BIT "OPTIONAL" (B1 5) "AUX" (OFFS ,P-P1OFF) TYP)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 4-7 (8110)
+		      <COND (<NOT <==? .TYP .B1>> <SET OFFS <+ .OFFS 1>>)>
+		      <GETB .PTR .OFFS>)>)>>
+;" Scan through a noun clause, leave a pointer to its starting location"
+ 
+<ROUTINE CLAUSE (PTR VAL WRD "AUX" OFF NUM (ANDFLG <>) (FIRST?? T) NW (LW 0)) 
+	#DECL ((PTR VAL OFF NUM) FIX (WRD NW) <OR FALSE FIX TABLE>
+	       (ANDFLG FIRST??) <OR ATOM FALSE>)
+	<SET OFF <* <- ,P-NCN 1> 2>>
+	<COND (<NOT <==? .VAL 0>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 3-7 (13954)
+		      <COND (<NOT <EQUAL? .TYP .B1>> <SET OFFS <+ .OFFS 1>>)>
+		      <GETB .PTR .OFFS>)>)>>
+;" Scan through a noun clause, leave a pointer to its starting location"
+<ROUTINE CLAUSE (PTR VAL WRD "AUX" OFF NUM (ANDFLG <>) (FIRST?? T) NW (LW 0))
+	<SET OFF <* <- ,P-NCN 1> 2>>
+	<COND (<NOT <EQUAL? .VAL 0>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 4-20 (8698)
+	<COND (<0? ,P-LEN> <SETG P-NCN <- ,P-NCN 1>> <RETURN -1>)>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 3-19 (14444)
+	<COND (<ZERO? ,P-LEN> <SETG P-NCN <- ,P-NCN 1>> <RETURN -1>)>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 4-30 (9157)
+		       <COND (<0? ,P-LEN> <SET NW 0>)
+			     (T <SET NW <GET ,P-LEXV <+ .PTR ,P-LEXELEN>>>)>
+		       ;<COND (<AND <==? .WRD ,W?OF>
+				   <==? <GET ,P-ITBL ,P-VERB> ,ACT?ACCUSE>>
+			      <PUT ,P-LEXV .PTR ,W?WITH>
+			      <SET WRD ,W?WITH>)>
+		       <COND ;(<AND <EQUAL? .WRD ,W?PERIOD>
+				   <EQUAL? .LW ,W?MRS ,W?MR ,W?MS>>
+			      <SET LW 0>)
+			     (<EQUAL? .WRD ,W?AND ,W?COMMA> <SET ANDFLG T>)
+			     (<EQUAL? .WRD ,W?ALL ,W?ONE>
+			      <COND (<==? .NW ,W?OF>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 3-29 (14906)
+		       <COND (<ZERO? ,P-LEN> <SET NW 0>)
+			     (T <SET NW <GET ,P-LEXV <+ .PTR ,P-LEXELEN>>>)>
+		       <COND (<EQUAL? .WRD ,W?AND ,W?COMMA> <SET ANDFLG T>)
+			     (<EQUAL? .WRD ,W?ALL ,W?ONE ;,W?BOTH>
+			      <COND (<EQUAL? .NW ,W?OF>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 4-55 (10103)
+			      <COND (<AND <WT? .WRD
+					       ,PS?ADJECTIVE
+					       ,P1?ADJECTIVE>
+					  <NOT <==? .NW 0>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 3-47 (15608)
+			      <COND (<AND <G? ,P-LEN 0>
+					  <EQUAL? .NW ,W?OF>
+					  <NOT <EQUAL? .WRD ,W?ALL ,W?ONE>>>
+				     T)
+				    (<AND <WT? .WRD
+					       ,PS?ADJECTIVE
+					       ,P1?ADJECTIVE>
+					  <NOT <EQUAL? .NW 0>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 4-86 (11067)
+		<SET PTR <+ .PTR ,P-LEXELEN>>>> 
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 3-82 (16687)
+		<SET PTR <+ .PTR ,P-LEXELEN>>>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 4-95 (11374)
+			<COND (<==? .CHR 58>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 3-91 (16993)
+			<COND (<EQUAL? .CHR 58>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 4-104 (11665)
+	 <COND (<G? .SUM 5000> <RFALSE>)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 3-100 (17287)
+	 <COND (<G? .SUM 1000> <RFALSE>)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 5-2 (11898)
+<ROUTINE ORPHAN-MERGE ("AUX" (CNT -1) TEMP VERB BEG END (ADJ <>) WRD) 
+	 #DECL ((CNT TEMP VERB) FIX (BEG END) <PRIMTYPE VECTOR> (WRD) TABLE)
+	 <SETG P-OFLAG <>>
+	 <COND
+	  (<AND <NOT <0? <SET VERB <GET ,P-ITBL ,P-VERB>>>>
+		<NOT <==? .VERB <GET ,P-OTBL ,P-VERB>>>>
+	   <RFALSE>)
+	  (<==? ,P-NCN 2>
+	   <RFALSE>)
+	  (<==? <GET ,P-OTBL ,P-NC1> 1>
+	   <COND (<OR <==? <SET TEMP <GET ,P-ITBL ,P-PREP1>>
+			   <GET ,P-OTBL ,P-PREP1>>
+		      <0? .TEMP>>
+		  <PUT ,P-OTBL ,P-NC1 <GET ,P-ITBL ,P-NC1>>
+		  <PUT ,P-OTBL ,P-NC1L <GET ,P-ITBL ,P-NC1L>>)
+		 (T <RFALSE>)>)
+	  (<==? <GET ,P-OTBL ,P-NC2> 1>
+	   <COND (<OR <==? <SET TEMP <GET ,P-ITBL ,P-PREP1>>
+			   <GET ,P-OTBL ,P-PREP2>>
+		      <0? .TEMP>>
+		  <PUT ,P-OTBL ,P-NC2 <GET ,P-ITBL ,P-NC1>>
+		  <PUT ,P-OTBL ,P-NC2L <GET ,P-ITBL ,P-NC1L>>
+		  <SETG P-NCN 2>)
+		 (T <RFALSE>)>)
+	  (,P-ACLAUSE
+	   <COND
+	    (<NOT <==? ,P-NCN 1>> <SETG P-ACLAUSE <>> <RFALSE>)
+	    (T
+	     <SET BEG <GET ,P-ITBL ,P-NC1>>
+	     <SET END <GET ,P-ITBL ,P-NC1L>>
+	     <REPEAT ()
+		     <COND (<==? .BEG .END>
+			    <COND (.ADJ
+				   <ACLAUSE-WIN .ADJ>
+				   <RETURN>)
+				  (T
+				   <SETG P-ACLAUSE <>>
+				   <RFALSE>)>)
+			   (<AND <BTST <GETB <SET WRD <GET .BEG 0>> ,P-PSOFF>
+				       ,PS?ADJECTIVE>
+				 <NOT .ADJ>>
+			    <SET ADJ .WRD>)
+			   (<OR <BTST <GETB .WRD ,P-PSOFF> ,PS?OBJECT>
+				<==? .WRD ,W?ONE>>
+			    <COND (<NOT <EQUAL? .WRD ,P-ANAM ,W?ONE>> <RFALSE>)
+				  (T
+				   <ACLAUSE-WIN .ADJ>
+				   <RETURN>)>)>
+		     <SET BEG <REST .BEG ,P-WORDLEN>>>)>)>
+	 <REPEAT ()
+		 <COND (<G? <SET CNT <+ .CNT 1>> ,P-ITBLLEN>
+			<SETG P-MERGED T>
+			<RTRUE>)
+		       (T <PUT ,P-ITBL .CNT <GET ,P-OTBL .CNT>>)>>
+	 T>
+<ROUTINE ACLAUSE-WIN (ADJ)
+	 <SETG P-CCSRC ,P-OTBL>
+	 <CLAUSE-COPY ,P-ACLAUSE <+ ,P-ACLAUSE 1> .ADJ>
+	 <AND <NOT <==? <GET ,P-OTBL ,P-NC2> 0>>
+	      <SETG P-NCN 2>>
+	 <SETG P-ACLAUSE <>>
+	 <RTRUE>>
+;"Print undefined word in input.
+   PTR points to the unknown word in P-LEXV"   
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 3-110 (17515)
+<GLOBAL P-DIRECTION 0>
+;"New ORPHAN-MERGE for TRAP Retrofix 6/21/84"
+<ROUTINE ORPHAN-MERGE ("AUX" (CNT -1) TEMP VERB BEG END (ADJ <>) WRD)
+   <SETG P-OFLAG <>>
+   <COND (<OR <EQUAL? <WT? <SET WRD <GET <GET ,P-ITBL ,P-VERBN> 0>>
+			   ,PS?VERB ,P1?VERB>
+		      <GET ,P-OTBL ,P-VERB>>
+	      <NOT <ZERO? <WT? .WRD ,PS?ADJECTIVE>>>>
+	  <SET ADJ T>)
+	 (<AND <NOT <ZERO? <WT? .WRD ,PS?OBJECT ,P1?OBJECT>>>
+	       <EQUAL? ,P-NCN 0>>
+	  <PUT ,P-ITBL ,P-VERB 0>
+	  <PUT ,P-ITBL ,P-VERBN 0>
+	  <PUT ,P-ITBL ,P-NC1 <REST ,P-LEXV 2>>
+	  <PUT ,P-ITBL ,P-NC1L <REST ,P-LEXV 6>>
+	  <SETG P-NCN 1>)>
+   <COND (<AND <NOT <ZERO? <SET VERB <GET ,P-ITBL ,P-VERB>>>>
+	       <NOT .ADJ>
+	       <NOT <EQUAL? .VERB <GET ,P-OTBL ,P-VERB>>>>
+	  <RFALSE>)
+	 (<EQUAL? ,P-NCN 2> <RFALSE>)
+	 (<EQUAL? <GET ,P-OTBL ,P-NC1> 1>
+	  <COND (<OR <EQUAL? <SET TEMP <GET ,P-ITBL ,P-PREP1>>
+			  <GET ,P-OTBL ,P-PREP1>>
+		     <ZERO? .TEMP>>
+		 <COND (.ADJ
+			<PUT ,P-OTBL ,P-NC1 <REST ,P-LEXV 2>>
+			<COND (<ZERO? <GET ,P-ITBL ,P-NC1L>>
+			       <PUT ,P-ITBL ,P-NC1L <REST ,P-LEXV 6>>)>
+			<COND (<ZERO? ,P-NCN> <SETG P-NCN 1>)>)
+		       (T
+			<PUT ,P-OTBL ,P-NC1 <GET ,P-ITBL ,P-NC1>>)>
+		 <PUT ,P-OTBL ,P-NC1L <GET ,P-ITBL ,P-NC1L>>)
+		(T <RFALSE>)>)
+	 (<EQUAL? <GET ,P-OTBL ,P-NC2> 1>
+	  <COND (<OR <EQUAL? <SET TEMP <GET ,P-ITBL ,P-PREP1>>
+			  <GET ,P-OTBL ,P-PREP2>>
+		     <ZERO? .TEMP>>
+		 <COND (.ADJ
+			<PUT ,P-ITBL ,P-NC1 <REST ,P-LEXV 2>>
+			<COND (<ZERO? <GET ,P-ITBL ,P-NC1L>>
+			       <PUT ,P-ITBL ,P-NC1L <REST ,P-LEXV 6>>)>)>
+		 <PUT ,P-OTBL ,P-NC2 <GET ,P-ITBL ,P-NC1>>
+		 <PUT ,P-OTBL ,P-NC2L <GET ,P-ITBL ,P-NC1L>>
+		 <SETG P-NCN 2>)
+		(T <RFALSE>)>)
+	 (<NOT <ZERO? ,P-ACLAUSE>>
+	  <COND (<AND <NOT <EQUAL? ,P-NCN 1>> <NOT .ADJ>>
+		 <SETG P-ACLAUSE <>>
+		 <RFALSE>)
+		(T
+		 <SET BEG <GET ,P-ITBL ,P-NC1>>
+		 <COND (.ADJ <SET BEG <REST ,P-LEXV 2>> <SET ADJ <>>)>
+		 <SET END <GET ,P-ITBL ,P-NC1L>>
+		 <REPEAT ()
+			 <SET WRD <GET .BEG 0>>
+			 <COND (<EQUAL? .BEG .END>
+				<COND (.ADJ <ACLAUSE-WIN .ADJ> <RETURN>)
+				      (T <SETG P-ACLAUSE <>> <RFALSE>)>)
+			       (<AND <NOT .ADJ>
+				     <OR <BTST <GETB .WRD ,P-PSOFF>
+					       ,PS?ADJECTIVE>
+					 <EQUAL? .WRD ,W?ALL ,W?ONE>>>
+				<SET ADJ .WRD>)
+			       (<EQUAL? .WRD ,W?ONE>
+				<ACLAUSE-WIN .ADJ>
+				<RETURN>)
+			       (<BTST <GETB .WRD ,P-PSOFF> ,PS?OBJECT>
+				<COND (<EQUAL? .WRD ,P-ANAM>
+				       <ACLAUSE-WIN .ADJ>)
+				      (T
+				       <NCLAUSE-WIN>)>
+				<RETURN>)>
+			 <SET BEG <REST .BEG ,P-WORDLEN>>
+			 <COND (<EQUAL? .END 0>
+				<SET END .BEG>
+				<SETG P-NCN 1>
+				<PUT ,P-ITBL ,P-NC1 <BACK .BEG 4>>
+				<PUT ,P-ITBL ,P-NC1L .BEG>)>>)>)>
+   <PUT ,P-VTBL 0 <GET ,P-OVTBL 0>>
+   <PUTB ,P-VTBL 2 <GETB ,P-OVTBL 2>>
+   <PUTB ,P-VTBL 3 <GETB ,P-OVTBL 3>>
+   <PUT ,P-OTBL ,P-VERBN ,P-VTBL>
+   <PUTB ,P-VTBL 2 0>
+   <REPEAT ()
+	   <COND (<G? <SET CNT <+ .CNT 1>> ,P-ITBLLEN>
+		  <SETG P-MERGED T>
+		  <RTRUE>)
+		 (T <PUT ,P-ITBL .CNT <GET ,P-OTBL .CNT>>)>>
+   T>
+;"New ACLAUSE-WIN for TRAP retrofix 6/21/84"
+<ROUTINE ACLAUSE-WIN (ADJ)
+	<PUT ,P-ITBL ,P-VERB <GET ,P-OTBL ,P-VERB>>
+	<PUT ,P-CCTBL ,CC-SBPTR ,P-ACLAUSE>
+	<PUT ,P-CCTBL ,CC-SEPTR <+ ,P-ACLAUSE 1>>
+	<PUT ,P-CCTBL ,CC-DBPTR ,P-ACLAUSE>
+	<PUT ,P-CCTBL ,CC-DEPTR <+ ,P-ACLAUSE 1>>
+	<CLAUSE-COPY ,P-OTBL ,P-OTBL .ADJ>
+	<AND <NOT <EQUAL? <GET ,P-OTBL ,P-NC2> 0>> <SETG P-NCN 2>>
+	<SETG P-ACLAUSE <>>
+	<RTRUE>>
+<ROUTINE NCLAUSE-WIN ()
+        <PUT ,P-CCTBL ,CC-SBPTR ,P-NC1>
+	<PUT ,P-CCTBL ,CC-SEPTR ,P-NC1L>
+	<PUT ,P-CCTBL ,CC-DBPTR ,P-ACLAUSE>
+	<PUT ,P-CCTBL ,CC-DEPTR <+ ,P-ACLAUSE 1>>
+	<CLAUSE-COPY ,P-ITBL ,P-OTBL>
+	<AND <NOT <EQUAL? <GET ,P-OTBL ,P-NC2> 0>> <SETG P-NCN 2>>
+	<SETG P-ACLAUSE <>>
+	<RTRUE>>
+;"Print undefined word in input.
+   PTR points to the unknown word in P-LEXV"
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 6-9 (14077)
+<ROUTINE UNKNOWN-WORD (PTR "AUX" BUF) 
+	#DECL ((PTR BUF) FIX)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 5-9 (21520)
+<ROUTINE UNKNOWN-WORD (PTR "AUX" BUF)
+	<PUT ,OOPS-TABLE ,O-PTR .PTR>
+	<COND (<VERB? SAY>
+	       <TELL "Nothing happens." CR>
+	       <RFALSE>)>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 6-18 (14337)
+<ROUTINE CANT-USE (PTR "AUX" BUF) 
+	#DECL ((PTR BUF) FIX)
+	<TELL "I can't use the word \"">
+	<WORD-PRINT <GETB <REST ,P-LEXV <SET BUF <* .PTR 2>>> 2>
+		    <GETB <REST ,P-LEXV .BUF> 3>>
+	<TELL "\" here." CR>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 5-21 (21866)
+<ROUTINE CANT-USE (PTR "AUX" BUF)
+	<COND (<VERB? SAY>
+	       <TELL "Nothing happens." CR>
+	       <RFALSE>)>
+	<TELL "You used the word \"">
+	<WORD-PRINT <GETB <REST ,P-LEXV <SET BUF <* .PTR 2>>> 2>
+		    <GETB <REST ,P-LEXV .BUF> 3>>
+	<TELL "\" in a way that I don't understand." CR>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 6-30 (14801)
+   the syntax is saved in P-SYNTAX."   
+ 
+<GLOBAL P-SLOCBITS 0>    
+ 
+<CONSTANT P-SYNLEN 8>    
+ 
+<CONSTANT P-SBITS 0>
+ 
+<CONSTANT P-SPREP1 1>    
+ 
+<CONSTANT P-SPREP2 2>    
+ 
+<CONSTANT P-SFWIM1 3>    
+ 
+<CONSTANT P-SFWIM2 4>    
+ 
+<CONSTANT P-SLOC1 5>
+ 
+<CONSTANT P-SLOC2 6>
+ 
+<CONSTANT P-SACTION 7>   
+ 
+<CONSTANT P-SONUMS 3>    
+<ROUTINE SYNTAX-CHECK ("AUX" SYN LEN NUM OBJ (DRIVE1 <>) (DRIVE2 <>) PREP VERB TMP) 
+	#DECL ((DRIVE1 DRIVE2) <OR FALSE <PRIMTYPE VECTOR>>
+	       (SYN) <PRIMTYPE VECTOR> (LEN NUM VERB PREP) FIX
+	       (OBJ) <OR FALSE OBJECT>)
+	<COND (<0? <SET VERB <GET ,P-ITBL ,P-VERB>>>
+	       <TELL "I can't find a verb in that sentence!" CR>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 5-35 (22409)
+   the syntax is saved in P-SYNTAX."
+<GLOBAL P-SLOCBITS 0>
+<CONSTANT P-SYNLEN 8>
+<CONSTANT P-SBITS 0>
+<CONSTANT P-SPREP1 1>
+<CONSTANT P-SPREP2 2>
+<CONSTANT P-SFWIM1 3>
+<CONSTANT P-SFWIM2 4>
+<CONSTANT P-SLOC1 5>
+<CONSTANT P-SLOC2 6>
+<CONSTANT P-SACTION 7>
+<CONSTANT P-SONUMS 3>
+<ROUTINE SYNTAX-CHECK ("AUX" SYN LEN NUM OBJ
+		       	    (DRIVE1 <>) (DRIVE2 <>) PREP VERB TMP)
+	<COND (<ZERO? <SET VERB <GET ,P-ITBL ,P-VERB>>>
+	       <TELL "There was no verb in that sentence!" CR>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 7-16 (15733)
+			    <0? ,P-NCN>
+			    <OR <0? <SET PREP <GET ,P-ITBL ,P-PREP1>>>
+				<==? .PREP <GETB .SYN ,P-SPREP1>>>>
+		       <SET DRIVE1 .SYN>)
+		      (<==? <GETB .SYN ,P-SPREP1> <GET ,P-ITBL ,P-PREP1>>
+		       <COND (<AND <==? .NUM 2> <==? ,P-NCN 1>>
+			      <SET DRIVE2 .SYN>)
+			     (<==? <GETB .SYN ,P-SPREP2> <GET ,P-ITBL ,P-PREP2>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 5-63 (23149)
+			    <ZERO? ,P-NCN>
+			    <OR <ZERO? <SET PREP <GET ,P-ITBL ,P-PREP1>>>
+				<EQUAL? .PREP <GETB .SYN ,P-SPREP1>>>>
+		       <SET DRIVE1 .SYN>)
+		      (<EQUAL? <GETB .SYN ,P-SPREP1> <GET ,P-ITBL ,P-PREP1>>
+		       <COND (<AND <EQUAL? .NUM 2> <EQUAL? ,P-NCN 1>>
+			      <SET DRIVE2 .SYN>)
+			     (<EQUAL? <GETB .SYN ,P-SPREP2>
+				   <GET ,P-ITBL ,P-PREP2>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 7-29 (16213)
+			      <TELL "I don't understand that sentence." CR>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 5-77 (23658)
+			      <TELL
+"That sentence isn't one I recognize." CR>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 7-48 (16834)
+	      (<EQUAL? .VERB ,ACT?FIND ;,ACT?WHAT>
+	       <TELL "I can't answer that question." CR>
+	       <RFALSE>)
+	      (<NOT <==? ,WINNER ,PLAYER>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 5-97 (24283)
+	      (<EQUAL? .VERB ,ACT?FIND>
+	       <TELL "That question can't be answered." CR>
+	       <RFALSE>)
+	      (<NOT <EQUAL? ,WINNER ,PLAYER>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 7-57 (17136)
+	       <COND (<==? .TMP 0> <TELL "tell">)
+		     (<0? <GETB ,P-VTBL 2>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 5-106 (24580)
+	       <COND (<EQUAL? .TMP 0> <TELL "tell">)
+		     (<ZERO? <GETB ,P-VTBL 2>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 7-64 (17358)
+		      <CLAUSE-PRINT ,P-NC1 ,P-NC1L>)>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 5-113 (24808)
+		      <TELL " ">
+		      <THING-PRINT T T>)>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 7-69 (17547)
+	       <RFALSE>)>> 
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 5-119 (25005)
+	       <RFALSE>)>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 8-2 (17680)
+<ROUTINE ORPHAN (D1 D2 "AUX" (CNT -1)) 
+	#DECL ((D1 D2) <OR FALSE <PRIMTYPE VECTOR>>)
+	<PUT ,P-OCLAUSE ,P-MATCHLEN 0>
+	<SETG P-CCSRC ,P-ITBL>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 6-2 (25137)
+<ROUTINE ORPHAN (D1 D2 "AUX" (CNT -1))
+	<COND (<NOT ,P-MERGED>
+	       <PUT ,P-OCLAUSE ,P-MATCHLEN 0>)>
+	<PUT ,P-OVTBL 0 <GET ,P-VTBL 0>>
+	<PUTB ,P-OVTBL 2 <GETB ,P-VTBL 2>>
+	<PUTB ,P-OVTBL 3 <GETB ,P-VTBL 3>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 8-9 (17936)
+	<COND (<==? ,P-NCN 2> <CLAUSE-COPY ,P-NC2 ,P-NC2L>)>
+	<COND (<NOT <L? ,P-NCN 1>> <CLAUSE-COPY ,P-NC1 ,P-NC1L>)>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 6-11 (25463)
+	<COND (<EQUAL? ,P-NCN 2>
+	       <PUT ,P-CCTBL ,CC-SBPTR ,P-NC2>
+	       <PUT ,P-CCTBL ,CC-SEPTR ,P-NC2L>
+	       <PUT ,P-CCTBL ,CC-DBPTR ,P-NC2>
+	       <PUT ,P-CCTBL ,CC-DEPTR ,P-NC2L>
+	       <CLAUSE-COPY ,P-ITBL ,P-OTBL>)>
+	<COND (<NOT <L? ,P-NCN 1>>
+	       <PUT ,P-CCTBL ,CC-SBPTR ,P-NC1>
+	       <PUT ,P-CCTBL ,CC-SEPTR ,P-NC1L>
+	       <PUT ,P-CCTBL ,CC-DBPTR ,P-NC1>
+	       <PUT ,P-CCTBL ,CC-DEPTR ,P-NC1L>
+	       <CLAUSE-COPY ,P-ITBL ,P-OTBL>)>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 8-16 (18216)
+	       <PUT ,P-OTBL ,P-NC2 1>)>> 
+ 
+<ROUTINE CLAUSE-PRINT (BPTR EPTR "OPTIONAL" (THE? T)) 
+	<BUFFER-PRINT <GET ,P-ITBL .BPTR> <GET ,P-ITBL .EPTR> .THE?>>    
+ 
+<ROUTINE BUFFER-PRINT (BEG END CP "AUX" (NOSP <>) WRD (FIRST?? T) (PN <>))
+	 #DECL ((BEG END) <PRIMTYPE VECTOR> (CP) <OR FALSE ATOM>)
+	 <REPEAT ()
+		<COND (<==? .BEG .END> <RETURN>)
+		      (T
+		       <COND (.NOSP <SET NOSP <>>)
+			     (T <TELL " ">)>
+		       <COND (<==? <SET WRD <GET .BEG 0>> ,W?PERIOD> <SET NOSP T>)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 6-28 (26098)
+	       <PUT ,P-OTBL ,P-NC2 1>)>>
+;<ROUTINE CLAUSE-PRINT (BPTR EPTR "OPTIONAL" (THE? T))
+	<BUFFER-PRINT <GET ,P-ITBL .BPTR> <GET ,P-ITBL .EPTR> .THE?>>
+<ROUTINE THING-PRINT (PRSO? "OPTIONAL" (THE? <>) "AUX" BEG END)
+	 <COND (.PRSO?
+		<SET BEG <GET ,P-ITBL ,P-NC1>>
+		<SET END <GET ,P-ITBL ,P-NC1L>>)
+	       (ELSE
+		<SET BEG <GET ,P-ITBL ,P-NC2>>
+		<SET END <GET ,P-ITBL ,P-NC2L>>)>
+	 <BUFFER-PRINT .BEG .END .THE?>>
+<ROUTINE BUFFER-PRINT (BEG END CP
+		       "AUX" (NOSP T) WRD (FIRST?? T) (PN <>) (Q? <>))
+	 <REPEAT ()
+		<COND (<EQUAL? .BEG .END> <RETURN>)
+		      (T
+		       <SET WRD <GET .BEG 0>>
+		       <COND ;(<EQUAL? .WRD ,W?$BUZZ> T)
+			     (<EQUAL? .WRD ,W?COMMA>
+			      <TELL ", ">)
+			     (.NOSP <SET NOSP <>>)
+			     (ELSE <TELL " ">)>
+		       <COND (<EQUAL? .WRD ,W?PERIOD ,W?COMMA>
+			      <SET NOSP T>)
+			     (<EQUAL? .WRD ,W?ME>
+			      <PRINTD ,ME>
+			      <SET PN T>)
+			     (<EQUAL? .WRD ,W?INTNUM>
+			      <PRINTN ,P-NUMBER>
+			      <SET PN T>)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 8-33 (18853)
+				    (<AND <==? .WRD ,W?IT>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 6-65 (27256)
+				    (<AND <EQUAL? .WRD ,W?IT>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 8-42 (19098)
+<ROUTINE PREP-PRINT (PREP "AUX" WRD) 
+	#DECL ((PREP) FIX)
+	<COND (<NOT <0? .PREP>>
+	       <TELL " ">
+	       <SET WRD <PREP-FIND .PREP>>
+	       <PRINTB .WRD>)>>    
+ 
+<ROUTINE CLAUSE-COPY (BPTR EPTR "OPTIONAL" (INSRT <>) "AUX" BEG END) 
+	#DECL ((BPTR EPTR) FIX (BEG END) <PRIMTYPE VECTOR>
+	       (INSRT) <OR FALSE TABLE>)
+	<SET BEG <GET ,P-CCSRC .BPTR>>
+	<SET END <GET ,P-CCSRC .EPTR>>
+	<PUT ,P-OTBL
+	     .BPTR
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 6-74 (27504)
+<ROUTINE PREP-PRINT (PREP "AUX" WRD)
+	<COND (<NOT <ZERO? .PREP>>
+	       <TELL " ">
+	       <COND ;(<EQUAL? .PREP ,PR?THROUGH>
+		      <TELL "through">)
+		     (T
+		      <SET WRD <PREP-FIND .PREP>>
+		      <PRINTB .WRD>)>)>>
+<ROUTINE CLAUSE-COPY (SRC DEST "OPTIONAL" (INSRT <>) "AUX" BEG END)
+	<SET BEG <GET .SRC <GET ,P-CCTBL ,CC-SBPTR>>>
+	<SET END <GET .SRC <GET ,P-CCTBL ,CC-SEPTR>>>
+	<PUT .DEST
+	     <GET ,P-CCTBL ,CC-DBPTR>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 8-59 (19622)
+		<COND (<==? .BEG .END>
+		       <PUT ,P-OTBL
+			    .EPTR
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 6-91 (28045)
+		<COND (<EQUAL? .BEG .END>
+		       <PUT .DEST
+			    <GET ,P-CCTBL ,CC-DEPTR>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 8-67 (19811)
+		       <COND (<AND .INSRT <==? ,P-ANAM <GET .BEG 0>>>
+			      <CLAUSE-ADD .INSRT>)>
+		       <CLAUSE-ADD <GET .BEG 0>>)>
+		<SET BEG <REST .BEG ,P-WORDLEN>>>>  
+<ROUTINE CLAUSE-ADD (WRD "AUX" PTR) 
+	#DECL ((WRD) TABLE (PTR) FIX)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 6-99 (28254)
+		       <COND (<AND .INSRT <EQUAL? ,P-ANAM <GET .BEG 0>>>
+			      <CLAUSE-ADD .INSRT>)>
+		       <CLAUSE-ADD <GET .BEG 0>>)>
+		<SET BEG <REST .BEG ,P-WORDLEN>>>>
+<ROUTINE CLAUSE-ADD (WRD "AUX" PTR)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 9-7 (20161)
+	<PUT ,P-OCLAUSE ,P-MATCHLEN .PTR>>   
+ 
+<ROUTINE PREP-FIND (PREP "AUX" (CNT 0) SIZE) 
+	#DECL ((PREP CNT SIZE) FIX)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 7-6 (28572)
+	<PUT ,P-OCLAUSE ,P-MATCHLEN .PTR>>
+<ROUTINE PREP-FIND (PREP "AUX" (CNT 0) SIZE)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 9-14 (20374)
+		      (<==? <GET ,PREPOSITIONS .CNT> .PREP>
+		       <RETURN <GET ,PREPOSITIONS <- .CNT 1>>>)>>>  
+ 
+<ROUTINE SYNTAX-FOUND (SYN) 
+	#DECL ((SYN) <PRIMTYPE VECTOR>)
+	<SETG P-SYNTAX .SYN>
+	<SETG PRSA <GETB .SYN ,P-SACTION>>>   
+ 
+<GLOBAL P-GWIMBIT 0>
+ 
+<ROUTINE GWIM (GBIT LBIT PREP "AUX" OBJ) 
+	#DECL ((GBIT LBIT) FIX (OBJ) OBJECT)
+	<COND (<==? .GBIT ,RLANDBIT>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 7-12 (28750)
+		      (<EQUAL? <GET ,PREPOSITIONS .CNT> .PREP>
+		       <RETURN <GET ,PREPOSITIONS <- .CNT 1>>>)>>>
+<ROUTINE SYNTAX-FOUND (SYN)
+	<SETG P-SYNTAX .SYN>
+	<SETG PRSA <GETB .SYN ,P-SACTION>>>
+<GLOBAL P-GWIMBIT 0>
+<ROUTINE GWIM (GBIT LBIT PREP "AUX" OBJ)
+	<COND (<EQUAL? .GBIT ,RMUNGBIT>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 9-33 (20920)
+	       <COND (<==? <GET ,P-MERGE ,P-MATCHLEN> 1>
+		      <SET OBJ <GET ,P-MERGE 1>>
+		      <TELL "(">
+		      <COND (<NOT <0? .PREP>>
+			     <PRINTB <PREP-FIND .PREP>>
+			     <COND ;(<==? .OBJ ,HANDS>
+				    <TELL " your hands)" CR>)
+				   (T
+				    <TELL " the ">)>)>
+		      <TELL D .OBJ ")" CR>
+		      .OBJ)>)
+	      (T <SETG P-GWIMBIT 0> <RFALSE>)>>   
+ 
+<ROUTINE SNARF-OBJECTS ("AUX" PTR) 
+	#DECL ((PTR) <OR FIX <PRIMTYPE VECTOR>>)
+	<COND (<NOT <==? <SET PTR <GET ,P-ITBL ,P-NC1>> 0>>
+	       <SETG P-SLOCBITS <GETB ,P-SYNTAX ,P-SLOC1>>
+	       <OR <SNARFEM .PTR <GET ,P-ITBL ,P-NC1L> ,P-PRSO> <RFALSE>>
+	       <OR <0? <GET ,P-BUTS ,P-MATCHLEN>>
+		   <SETG P-PRSO <BUT-MERGE ,P-PRSO>>>)>
+	<COND (<NOT <==? <SET PTR <GET ,P-ITBL ,P-NC2>> 0>>
+	       <SETG P-SLOCBITS <GETB ,P-SYNTAX ,P-SLOC2>>
+	       <OR <SNARFEM .PTR <GET ,P-ITBL ,P-NC2L> ,P-PRSI> <RFALSE>>
+	       <COND (<NOT <0? <GET ,P-BUTS ,P-MATCHLEN>>>
+		      <COND (<==? <GET ,P-PRSI ,P-MATCHLEN> 1>
+			     <SETG P-PRSO <BUT-MERGE ,P-PRSO>>)
+			    (T <SETG P-PRSI <BUT-MERGE ,P-PRSI>>)>)>)>
+	<RTRUE>>  
+<ROUTINE BUT-MERGE (TBL "AUX" LEN BUTLEN (CNT 1) (MATCHES 0) OBJ NTBL) 
+	#DECL ((TBL NTBL) TABLE (LEN BUTLEN MATCHES) FIX (OBJ) OBJECT)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 7-29 (29219)
+	       <COND (<EQUAL? <GET ,P-MERGE ,P-MATCHLEN> 1>
+		      <SET OBJ <GET ,P-MERGE 1>>
+		      <TELL "(">
+		      <COND (<AND <NOT <ZERO? .PREP>>
+				  <NOT ,P-END-ON-PREP>>
+			     <PRINTB <SET PREP <PREP-FIND .PREP>>>
+			     <COND (<EQUAL? .PREP ,W?OUT>
+				    <TELL " of">)>
+			     <TELL " ">
+			     <COND (<EQUAL? .OBJ ,HANDS>
+				    <TELL "your hands">)
+				   (T
+				    <TELL "the " D .OBJ>)>
+			     <TELL ")" CR>)
+			    (ELSE
+			     <TELL D .OBJ ")" CR>)>
+		      .OBJ)>)
+	      (T <SETG P-GWIMBIT 0> <RFALSE>)>>
+<ROUTINE SNARF-OBJECTS ("AUX" OPTR IPTR L)
+	 <PUT ,P-BUTS ,P-MATCHLEN 0>
+	 <COND (<NOT <EQUAL? <SET IPTR <GET ,P-ITBL ,P-NC2>> 0>>
+		<SETG P-SLOCBITS <GETB ,P-SYNTAX ,P-SLOC2>>
+		<OR <SNARFEM .IPTR <GET ,P-ITBL ,P-NC2L> ,P-PRSI> <RFALSE>>)>
+	 <COND (<NOT <EQUAL? <SET OPTR <GET ,P-ITBL ,P-NC1>> 0>>
+		<SETG P-SLOCBITS <GETB ,P-SYNTAX ,P-SLOC1>>
+		<OR <SNARFEM .OPTR <GET ,P-ITBL ,P-NC1L> ,P-PRSO> <RFALSE>>)>
+	 <COND (<NOT <ZERO? <GET ,P-BUTS ,P-MATCHLEN>>>
+		<SET L <GET ,P-PRSO ,P-MATCHLEN>>
+		<COND (.OPTR <SETG P-PRSO <BUT-MERGE ,P-PRSO>>)>
+		<COND (<AND .IPTR
+			    <OR <NOT .OPTR>
+				<EQUAL? .L <GET ,P-PRSO ,P-MATCHLEN>>>>
+		       <SETG P-PRSI <BUT-MERGE ,P-PRSI>>)>)>
+	 <RTRUE>>
+<ROUTINE BUT-MERGE (TBL "AUX" LEN BUTLEN (CNT 1) (MATCHES 0) OBJ NTBL)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 10-16 (22541)
+	.NTBL>    
+ 
+<GLOBAL P-NAM <>>   
+ 
+<GLOBAL P-ADJ <>>   
+ 
+<GLOBAL P-ADVERB <>>
+<GLOBAL P-ADJN <>>  
+ 
+<GLOBAL P-PRSO <ITABLE NONE 50>>   
+ 
+<GLOBAL P-PRSI <ITABLE NONE 50>>   
+ 
+<GLOBAL P-BUTS <ITABLE NONE 50>>   
+ 
+<GLOBAL P-MERGE <ITABLE NONE 50>>  
+ 
+<GLOBAL P-OCLAUSE <ITABLE NONE 50>>
+ 
+<GLOBAL P-MATCHLEN 0>    
+ 
+<GLOBAL P-GETFLAGS 0>    
+ 
+<CONSTANT P-ALL 1>  
+ 
+<CONSTANT P-ONE 2>  
+ 
+<CONSTANT P-INHIBIT 4>   
+<GLOBAL P-CSPTR <>>
+<GLOBAL P-CEPTR <>>
+<GLOBAL P-AND <>>
+<ROUTINE SNARFEM (PTR EPTR TBL "AUX" (BUT <>) LEN WV WRD NW) 
+   #DECL ((TBL) TABLE (PTR EPTR) <PRIMTYPE VECTOR>
+	  (BUT) <OR FALSE TABLE> (WV) <OR FALSE FIX>)
+   <SETG P-AND <>>
+   <SETG P-GETFLAGS 0>
+   <SETG P-CSPTR .PTR>
+   <SETG P-CEPTR .EPTR>
+   <PUT ,P-BUTS ,P-MATCHLEN 0>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 8-15 (30922)
+	.NTBL>
+<GLOBAL P-NAM <>>
+<GLOBAL P-ADJ <>>
+<GLOBAL P-ADVERB <>>
+<GLOBAL P-ADJN <>>
+<GLOBAL P-PRSO <ITABLE NONE 50>>
+<GLOBAL P-PRSI <ITABLE NONE 50>>
+<GLOBAL P-BUTS <ITABLE NONE 50>>
+<GLOBAL P-MERGE <ITABLE NONE 50>>
+<GLOBAL P-OCLAUSE <ITABLE NONE 100>>
+<GLOBAL P-MATCHLEN 0>
+<GLOBAL P-GETFLAGS 0>
+<CONSTANT P-ALL 1>
+<CONSTANT P-ONE 2>
+<CONSTANT P-INHIBIT 4>
+<GLOBAL P-AND <>>
+<ROUTINE SNARFEM (PTR EPTR TBL "AUX" (BUT <>) LEN WV WRD NW (WAS-ALL <>))
+   <SETG P-AND <>>
+   <COND (<EQUAL? ,P-GETFLAGS ,P-ALL>
+	  <SET WAS-ALL T>)>
+   <SETG P-GETFLAGS 0>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 11-18 (23420)
+	   <COND (<==? .PTR .EPTR> <RETURN <GET-OBJECT <OR .BUT .TBL>>>)
+		 (T
+		  <SET NW <GET .PTR ,P-LEXELEN>>
+		  <COND (<==? .WRD ,W?ALL>
+			 <SETG P-GETFLAGS ,P-ALL>
+			 <COND (<==? .NW ,W?OF>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-13 (31575)
+	   <COND (<EQUAL? .PTR .EPTR>
+		  <SET WV <GET-OBJECT <OR .BUT .TBL>>>
+		  <COND (.WAS-ALL <SETG P-GETFLAGS ,P-ALL>)>
+		  <RETURN .WV>)
+		 (T
+		  <COND (<==? .EPTR <REST .PTR ,P-WORDLEN>>
+			 <SET NW 0>)
+			(T <SET NW <GET .PTR ,P-LEXELEN>>)>
+		  <COND (<EQUAL? .WRD ,W?ALL ;,W?BOTH>
+			 <SETG P-GETFLAGS ,P-ALL>
+			 <COND (<EQUAL? .NW ,W?OF>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 11-32 (23882)
+				<COND (<==? .NW ,W?OF>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-32 (32194)
+				<COND (<EQUAL? .NW ,W?OF>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 11-37 (24047)
+				<AND <0? .NW> <RTRUE>>)>)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-37 (32362)
+				<AND <ZERO? .NW> <RTRUE>>)>)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 11-45 (24306)
+			(<==? .WRD ,W?OF>
+			 <COND (<0? ,P-GETFLAGS>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-45 (32624)
+			(<EQUAL? .WRD ,W?OF>
+			 <COND (<ZERO? ,P-GETFLAGS>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 11-55 (24614)
+	   <COND (<NOT <==? .PTR .EPTR>>
+		  <SET PTR <REST .PTR ,P-WORDLEN>>
+		  <SET WRD .NW>)>>>   
+ 
+<CONSTANT SH 128>   
+ 
+<CONSTANT SC 64>    
+ 
+<CONSTANT SIR 32>   
+ 
+<CONSTANT SOG 16>   
+ 
+<CONSTANT STAKE 8>  
+ 
+<CONSTANT SMANY 4>  
+ 
+<CONSTANT SHAVE 2>  
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-55 (32938)
+	   <COND (<NOT <EQUAL? .PTR .EPTR>>
+		  <SET PTR <REST .PTR ,P-WORDLEN>>
+		  <SET WRD .NW>)>>>
+<CONSTANT SH 128>
+<CONSTANT SC 64>
+<CONSTANT SIR 32>
+<CONSTANT SOG 16>
+<CONSTANT STAKE 8>
+<CONSTANT SMANY 4>
+<CONSTANT SHAVE 2>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-5 (25004)
+	 #DECL ((TBL) TABLE (XBITS BITS TLEN LEN) FIX (GWIM) <OR FALSE FIX>
+		(VRB GCHECK) <OR ATOM FALSE>)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-70 (33289)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-10 (25221)
+	 <COND (<AND <NOT ,P-NAM> ,P-ADJ <WT? ,P-ADJN ,PS?OBJECT ,P1?OBJECT>>
+		<SETG P-NAM ,P-ADJN>
+		<SETG P-ADJ <>>)>
+	 <COND (<AND <NOT ,P-NAM>
+		     <NOT ,P-ADJ>
+		     <NOT <==? ,P-GETFLAGS ,P-ALL>>
+		     <0? ,P-GWIMBIT>>
+		<COND (.VRB
+		       <TELL "I couldn't find a noun in that sentence!" CR>)>
+		<RFALSE>)>
+	 <COND (<OR <NOT <==? ,P-GETFLAGS ,P-ALL>> <0? ,P-SLOCBITS>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-73 (33403)
+	 <COND (<AND <NOT ,P-NAM> ,P-ADJ>
+		<COND (<WT? ,P-ADJN ,PS?OBJECT ,P1?OBJECT>
+		       <SETG P-NAM ,P-ADJN>
+		       <SETG P-ADJ <>>)
+		      %<COND (<==? ,ZORK-NUMBER 3>
+			      '(<SET BITS
+				     <WT? ,P-ADJN
+					  ,PS?DIRECTION ,P1?DIRECTION>>
+				<SETG P-ADJ <>>
+				<PUT .TBL ,P-MATCHLEN 1>
+				<PUT .TBL 1 ,INTDIR>
+				<SETG P-DIRECTION .BITS>
+				<RTRUE>))
+			     (ELSE '(<NULL-F> T))>>)>
+	 <COND (<AND <NOT ,P-NAM>
+		     <NOT ,P-ADJ>
+		     <NOT <EQUAL? ,P-GETFLAGS ,P-ALL>>
+		     <ZERO? ,P-GWIMBIT>>
+		<COND (.VRB
+		       <TELL
+"There seems to be a noun missing in that sentence!" CR>)>
+		<RFALSE>)>
+	 <COND (<OR <NOT <EQUAL? ,P-GETFLAGS ,P-ALL>> <ZERO? ,P-SLOCBITS>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-30 (25851)
+		      <DO-SL ,PLAYER ,SH ,SC>
+		      <COND (<EQUAL? <GET .TBL 0> .TLEN>
+			     <COND (<AND ,P-ADJ <EQUAL? ,P-NAM ,W?SPELL <>>>
+				    <SETG P-NAM ,P-ADJN>)>
+			     <SPELL-CHECK .TBL ,P-NAM>)>)>
+	       <SET LEN <- <GET .TBL ,P-MATCHLEN> .TLEN>>
+	       <COND (<BTST ,P-GETFLAGS ,P-ALL> ;<AND * <NOT <EQUAL? .LEN 0>>>)
+		     (<AND <BTST ,P-GETFLAGS ,P-ONE>
+			   <NOT <0? .LEN>>>
+		      <COND (<NOT <==? .LEN 1>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-105 (34356)
+		      <DO-SL ,PLAYER ,SH ,SC>)>
+	       <SET LEN <- <GET .TBL ,P-MATCHLEN> .TLEN>>
+	       <COND (<BTST ,P-GETFLAGS ,P-ALL>)
+		     (<AND <BTST ,P-GETFLAGS ,P-ONE>
+			   <NOT <ZERO? .LEN>>>
+		      <COND (<NOT <EQUAL? .LEN 1>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-46 (26479)
+			  <AND <0? .LEN> <NOT <==? ,P-SLOCBITS -1>>>>
+		      <COND (<==? ,P-SLOCBITS -1>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-117 (34789)
+			  <AND <ZERO? .LEN> <NOT <EQUAL? ,P-SLOCBITS -1>>>>
+		      <COND (<EQUAL? ,P-SLOCBITS -1>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-55 (26732)
+			     <COND (<0? .LEN> <SET LEN .OLEN>)>
+			     <COND (<NOT <==? ,WINNER ,PLAYER>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-126 (35051)
+			     <COND (<ZERO? .LEN> <SET LEN .OLEN>)>
+			     <COND (<NOT <EQUAL? ,WINNER ,PLAYER>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-62 (26953)
+					  <COND (<==? .TBL ,P-PRSO> ,P-NC1)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-133 (35278)
+					  <COND (<EQUAL? .TBL ,P-PRSO> ,P-NC1)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-70 (27155)
+"I couldn't find a noun in that sentence!" CR>)>
+			     <SETG P-NAM <>>
+			     <SETG P-ADJ <>>
+			     <RFALSE>)>)
+		     (<AND <0? .LEN> .GCHECK>
+		      <COND (.VRB
+			     <COND (,LIT
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-141 (35483)
+"There seems to be a noun missing in that sentence!" CR>)>
+			     <SETG P-NAM <>>
+			     <SETG P-ADJ <>>
+			     <RFALSE>)>)>
+	       <COND (<AND <ZERO? .LEN> .GCHECK>
+		      <COND (.VRB
+			     ;"next added 1/2/85 by JW"
+			     <SETG P-SLOCBITS .XBITS>
+			     <COND (<OR ,LIT <VERB? TELL ;WHERE ;WHAT ;WHO>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-90 (27733)
+		     (<0? .LEN> <SET GCHECK T> <AGAIN>)>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-163 (36188)
+		     (<ZERO? .LEN> <SET GCHECK T> <AGAIN>)>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-96 (27882)
+<ROUTINE MOBY-FIND (TBL "AUX" FOO LEN)
+	 <SETG P-SLOCBITS -1>
+	 <SETG P-TABLE .TBL>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-169 (36340)
+;<ROUTINE MOBY-FIND (TBL "AUX" FOO LEN)
+	 <SETG P-SLOCBITS -1>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-118 (28506)
+<GLOBAL P-MOBY-FOUND <>>   
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-190 (36942)
+;<GLOBAL P-MOBY-FOUND <>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-125 (28669)
+	 <TELL "Which">
+         <COND (<OR ,P-OFLAG ,P-MERGED ,P-AND>
+		<TELL " ">
+		<PRINTB ,P-NAM>)
+	       (<==? .TBL ,P-PRSO>
+		<CLAUSE-PRINT ,P-NC1 ,P-NC1L <>>)
+	       (T <CLAUSE-PRINT ,P-NC2 ,P-NC2L <>>)>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-197 (37103)
+	 <TELL "Which ">
+         <COND (<OR ,P-OFLAG ,P-MERGED ,P-AND>
+		<PRINTB <COND (,P-NAM ,P-NAM)
+			      (,P-ADJ ,P-ADJN)
+			      (ELSE ,W?ONE)>>)
+	       (ELSE
+		<THING-PRINT <EQUAL? .TBL ,P-PRSO>>)>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 12-137 (29006)
+		 <COND (<==? .LEN 2>
+		        <COND (<NOT <==? .RLEN 2>> <TELL ",">)>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 9-209 (37437)
+		 <COND (<EQUAL? .LEN 2>
+		        <COND (<NOT <EQUAL? .RLEN 2>> <TELL ",">)>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 13-2 (29237)
+<GLOBAL LAST-PSEUDO-LOC <>>
+<ROUTINE GLOBAL-CHECK (TBL "AUX" LEN RMG RMGL (CNT 0) OBJ OBITS FOO) 
+	#DECL ((TBL) TABLE (RMG) <OR FALSE TABLE> (RMGL CNT) FIX (OBJ) OBJECT)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 10-2 (37674)
+<ROUTINE GLOBAL-CHECK (TBL "AUX" LEN RMG RMGL (CNT 0) OBJ OBITS FOO)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 13-18 (29850)
+		       <COND (<==? ,P-NAM <GET .RMG <* .CNT 2>>>
+			      <SETG LAST-PSEUDO-LOC ,HERE>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 10-15 (38182)
+		       <COND (<EQUAL? ,P-NAM <GET .RMG <* .CNT 2>>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 13-30 (30287)
+	<COND (<==? <GET .TBL ,P-MATCHLEN> .LEN>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 10-26 (38583)
+	<COND (<EQUAL? <GET .TBL ,P-MATCHLEN> .LEN>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 13-35 (30460)
+	       <COND (<AND <0? <GET .TBL ,P-MATCHLEN>>
+			   <EQUAL? ,PRSA ,V?LOOK-INSIDE ,V?SEARCH ,V?EXAMINE>>
+		      <DO-SL ,ROOMS 1 1>)>)>>
+ 
+<ROUTINE DO-SL (OBJ BIT1 BIT2 "AUX" BTS) 
+	#DECL ((OBJ) OBJECT (BIT1 BIT2 BTS) FIX)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 10-31 (38759)
+	       <COND (<AND <ZERO? <GET .TBL ,P-MATCHLEN>>
+			   <EQUAL? ,PRSA ,V?LOOK-INSIDE ,V?SEARCH ,V?EXAMINE>>
+		      <DO-SL ,ROOMS 1 1>)>)>>
+<ROUTINE DO-SL (OBJ BIT1 BIT2 "AUX" BTS)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 13-48 (30964)
+		     (T <RTRUE>)>)>>  
+ 
+<CONSTANT P-SRCBOT 2>    
+ 
+<CONSTANT P-SRCTOP 0>    
+ 
+<CONSTANT P-SRCALL 1>    
+ 
+<ROUTINE SEARCH-LIST (OBJ TBL LVL "AUX" FLS NOBJ) 
+	#DECL ((OBJ NOBJ) <OR FALSE OBJECT> (TBL) TABLE (LVL) FIX (FLS) ANY)
+	<COND (<SET OBJ <FIRST? .OBJ>>
+	       <REPEAT ()
+		       <COND (<AND <NOT <==? .LVL ,P-SRCBOT>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 10-43 (39221)
+		     (T <RTRUE>)>)>>
+<CONSTANT P-SRCBOT 2>
+<CONSTANT P-SRCTOP 0>
+<CONSTANT P-SRCALL 1>
+<ROUTINE SEARCH-LIST (OBJ TBL LVL "AUX" FLS NOBJ)
+	<COND (<SET OBJ <FIRST? .OBJ>>
+	       <REPEAT ()
+		       <COND (<AND <NOT <EQUAL? .LVL ,P-SRCBOT>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 13-64 (31404)
+		       <COND (<AND <OR <NOT <==? .LVL ,P-SRCTOP>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 10-56 (39570)
+		       <COND (<AND <OR <NOT <EQUAL? .LVL ,P-SRCTOP>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 13-78 (31851)
+		       <COND (<SET OBJ <NEXT? .OBJ>>) (T <RETURN>)>>)>> 
+ 
+<ROUTINE OBJ-FOUND (OBJ TBL "AUX" PTR) 
+	#DECL ((OBJ) OBJECT (TBL) TABLE (PTR) FIX)
+	<SET PTR <GET .TBL ,P-MATCHLEN>>
+	<PUT .TBL <+ .PTR 1> .OBJ>
+	<PUT .TBL ,P-MATCHLEN <+ .PTR 1>>> 
+ 
+<ROUTINE TAKE-CHECK () 
+	<AND <ITAKE-CHECK ,P-PRSO <GETB ,P-SYNTAX ,P-SLOC1>>
+	     <ITAKE-CHECK ,P-PRSI <GETB ,P-SYNTAX ,P-SLOC2>>>> 
+<ROUTINE ITAKE-CHECK (TBL BTS "AUX" PTR OBJ TAKEN) 
+	 #DECL ((TBL) TABLE (BTS PTR) FIX (OBJ) OBJECT
+		(TAKEN) <OR FALSE FIX ATOM>)
+	 <COND (<AND <SET PTR <GET .TBL ,P-MATCHLEN>> <BTST .BTS ,STAKE>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 10-70 (40020)
+		       <COND (<SET OBJ <NEXT? .OBJ>>) (T <RETURN>)>>)>>
+<ROUTINE OBJ-FOUND (OBJ TBL "AUX" PTR)
+	<SET PTR <GET .TBL ,P-MATCHLEN>>
+	<PUT .TBL <+ .PTR 1> .OBJ>
+	<PUT .TBL ,P-MATCHLEN <+ .PTR 1>>>
+<ROUTINE TAKE-CHECK ()
+	<AND <ITAKE-CHECK ,P-PRSO <GETB ,P-SYNTAX ,P-SLOC1>>
+	     <ITAKE-CHECK ,P-PRSI <GETB ,P-SYNTAX ,P-SLOC2>>>>
+<ROUTINE ITAKE-CHECK (TBL IBITS "AUX" PTR OBJ TAKEN)
+	 #DECL ((TBL) TABLE (IBITS PTR) FIX (OBJ) OBJECT
+		(TAKEN) <OR FALSE FIX ATOM>)
+	 <COND (<AND <SET PTR <GET .TBL ,P-MATCHLEN>>
+		     <OR <BTST .IBITS ,SHAVE>
+			 <BTST .IBITS ,STAKE>>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 14-10 (32567)
+			       <COND (<==? .OBJ ,IT>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 11-12 (40728)
+			       <COND (<EQUAL? .OBJ ,IT>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 14-17 (32785)
+			       <COND (<NOT <IN? .OBJ ,WINNER>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 11-19 (40949)
+			       <COND (<AND <NOT <HELD? .OBJ>>
+					   <NOT <EQUAL? .OBJ ,HANDS ,ME>>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 14-21 (32925)
+					    (<==? <ITAKE <>> T>
+					     <SET TAKEN <>>)
+					    (T <SET TAKEN T>)>
+				      <COND (<AND .TAKEN <BTST .BTS ,SHAVE>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 11-24 (41129)
+					    (<NOT <EQUAL? ,WINNER ,ADVENTURER>>
+					     <SET TAKEN <>>)
+					    (<AND <BTST .IBITS ,STAKE>
+						  <EQUAL? <ITAKE <>> T>>
+					     <SET TAKEN <>>)
+					    (T <SET TAKEN T>)>
+				      <COND (<AND .TAKEN
+						  <BTST .IBITS ,SHAVE>
+						  <EQUAL? ,WINNER
+							  ,ADVENTURER>>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 14-34 (33300)
+					    (<NOT .TAKEN>
+					     <TELL "(Taken)" CR>)>)>)>>)
+	       (T)>>  
+ 
+<ROUTINE MANY-CHECK ("AUX" (LOSS <>) TMP) 
+	#DECL ((LOSS) <OR FALSE FIX>)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 11-43 (41675)
+					    (<AND <NOT .TAKEN>
+						  <EQUAL? ,WINNER ,ADVENTURER>>
+					     <TELL "(Taken)" CR>)>)>)>>)
+	       (T)>>
+<ROUTINE MANY-CHECK ("AUX" (LOSS <>) TMP)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 14-47 (33723)
+	       <TELL "I can't use multiple ">
+	       <COND (<==? .LOSS 2> <TELL "in">)>
+	       <TELL "direct objects with \"">
+	       <SET TMP <GET ,P-ITBL ,P-VERBN>>
+	       <COND (<0? .TMP> <TELL "tell">)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 11-56 (42106)
+	       <TELL "You can't use multiple ">
+	       <COND (<EQUAL? .LOSS 2> <TELL "in">)>
+	       <TELL "direct objects with \"">
+	       <SET TMP <GET ,P-ITBL ,P-VERBN>>
+	       <COND (<ZERO? .TMP> <TELL "tell">)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 14-58 (34103)
+	      (T)>>  
+ 
+<ROUTINE ZMEMQ (ITM TBL "OPTIONAL" (SIZE -1) "AUX" (CNT 1)) 
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 11-67 (42494)
+	      (T)>>
+<ROUTINE ZMEMQ (ITM TBL "OPTIONAL" (SIZE -1) "AUX" (CNT 1))
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 14-65 (34309)
+		<COND (<==? .ITM <GET .TBL .CNT>> <RTRUE>)
+		      (<IGRTR? CNT .SIZE> <RFALSE>)>>>    
+<ROUTINE ZMEMQB (ITM TBL SIZE "AUX" (CNT 0)) 
+	#DECL ((ITM) ANY (TBL) TABLE (SIZE CNT) FIX)
+	<REPEAT ()
+		<COND (<==? .ITM <GETB .TBL .CNT>> <RTRUE>)
+		      (<IGRTR? CNT .SIZE> <RFALSE>)>>>  
+ 
+<GLOBAL ALWAYS-LIT <>>
+<ROUTINE LIT? (RM "OPTIONAL" (RMBIT T) "AUX" OHERE (LIT <>)) 
+	#DECL ((RM OHERE) OBJECT (LIT) <OR ATOM FALSE>)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 11-74 (42696)
+		<COND (<EQUAL? .ITM <GET .TBL .CNT>>
+		       <RETURN <REST .TBL <* .CNT 2>>>)
+		      (<IGRTR? CNT .SIZE> <RFALSE>)>>>
+<ROUTINE ZMEMQB (ITM TBL SIZE "AUX" (CNT 0))
+	<REPEAT ()
+		<COND (<EQUAL? .ITM <GETB .TBL .CNT>>
+		       <RTRUE>)
+		      (<IGRTR? CNT .SIZE>
+		       <RFALSE>)>>>
+<GLOBAL ALWAYS-LIT <>>
+<ROUTINE LIT? (RM "OPTIONAL" (RMBIT T) "AUX" OHERE (LIT <>))
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 15-20 (34949)
+	      (<AND .RMBIT
+		    <NOT <G? ,TOD ,NIGHTFALL>>
+		    <FSET? .RM ,LIGHTBIT>>
+	       <SET LIT T>)
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 12-20 (43290)
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 15-28 (35168)
+	       <COND (<==? .OHERE .RM>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 12-24 (43402)
+	       <COND (<EQUAL? .OHERE .RM>
+***************
+
+**** FILE SS:<ENCHANTER>PARSER.ZIL.70, 15-37 (35474)
+	.LIT> 
+  
+<ROUTINE PRSO-PRINT ("AUX" PTR)
+	 <COND (<OR ,P-MERGED
+		    <==? <GET <SET PTR <GET ,P-ITBL ,P-NC1>> 0> ,W?IT>>
+		<TELL " " D ,PRSO>)
+	       (T <BUFFER-PRINT .PTR <GET ,P-ITBL ,P-NC1L> <>>)>>
+<ROUTINE PRSI-PRINT ("AUX" PTR)
+	 <COND (<OR ,P-MERGED
+		    <==? <GET <SET PTR <GET ,P-ITBL ,P-NC2>> 0> ,W?IT>>
+		<TELL " " D ,PRSO>)
+	       (T <BUFFER-PRINT .PTR <GET ,P-ITBL ,P-NC2L> <>>)>>
+**** FILE SS:<ZORK1>GPARSER.ZIL.44, 12-33 (43711)
+	.LIT>
+;<ROUTINE PRSO-PRINT ("AUX" PTR)
+	 <COND (<OR ,P-MERGED
+		    <EQUAL? <GET <SET PTR <GET ,P-ITBL ,P-NC1>> 0> ,W?IT>>
+		<TELL " " D ,PRSO>)
+	       (T <BUFFER-PRINT .PTR <GET ,P-ITBL ,P-NC1L> <>>)>>
+;<ROUTINE PRSI-PRINT ("AUX" PTR)
+	 <COND (<OR ,P-MERGED
+		    <EQUAL? <GET <SET PTR <GET ,P-ITBL ,P-NC2>> 0> ,W?IT>>
+		<TELL " " D ,PRSO>)
+	       (T <BUFFER-PRINT .PTR <GET ,P-ITBL ,P-NC2L> <>>)>>
+;"former CRUFTY routine, re-written by SWG"
+<ROUTINE THIS-IT? (OBJ TBL "AUX" SYNS)
+ <COND (<FSET? .OBJ ,INVISIBLE> <RFALSE>)
+       (<AND ,P-NAM
+	     <NOT <ZMEMQ ,P-NAM
+			 <SET SYNS <GETPT .OBJ ,P?SYNONYM>>
+			 <- </ <PTSIZE .SYNS> 2> 1>>>>
+	<RFALSE>)
+       (<AND ,P-ADJ
+	     <OR <NOT <SET SYNS <GETPT .OBJ ,P?ADJECTIVE>>>
+		 <NOT <ZMEMQB ,P-ADJ .SYNS <- <PTSIZE .SYNS> 1>>>>>
+	<RFALSE>)
+       (<AND <NOT <ZERO? ,P-GWIMBIT>> <NOT <FSET? .OBJ ,P-GWIMBIT>>>
+	<RFALSE>)>
+ <RTRUE>>
+***************
+

@@ -7,6 +7,8 @@
 	      without consulting MARC!"
  	    NORTH NE EAST SE SOUTH SW WEST NW UP DOWN IN OUT>
 
+<ROUTINE NULL-F () <RFALSE>>
+
 "SUBTITLE GLOBAL OBJECTS"
 
 <OBJECT GLOBAL-OBJECTS
@@ -501,11 +503,11 @@ I wouldn't drink the stuff." CR>)
 			      <RFALSE>)>)>)>
 	 ;"Here is the default 'cant see any' printer"
 	 <COND (<EQUAL? ,WINNER ,PLAYER>
-		<TELL "You can't see any">
+		<TELL "You can't see any ">
 		<NOT-HERE-PRINT .PRSO?>
 		<TELL " here!" CR>)
 	       (T
-		<TELL "The " D ,WINNER " seems confused. \"I don't see any">
+		<TELL "The " D ,WINNER " seems confused. \"I don't see any ">
 		<NOT-HERE-PRINT .PRSO?>
 		<TELL " here!\"" CR>)>
 	 <SETG P-CONT <>>
@@ -530,7 +532,7 @@ I wouldn't drink the stuff." CR>)
 		     (T <SETG PRSI ,P-MOBY-FOUND>)>
 	       <RFALSE>)
 	      (<NOT .PRSO?>
-	       <TELL "You wouldn't find any">
+	       <TELL "You wouldn't find any ">
 	       <NOT-HERE-PRINT .PRSO?>
 	       <TELL " there." CR>
 	       <RTRUE>)
@@ -549,8 +551,8 @@ I wouldn't drink the stuff." CR>)
 
 <ROUTINE NOT-HERE-PRINT (PRSO?)
  <COND (,P-OFLAG
-	<COND (,P-XADJ <TELL " "> <PRINTB ,P-XADJN>)>
-	<COND (,P-XNAM <TELL " "> <PRINTB ,P-XNAM>)>)
+	<COND (,P-XADJ ;<TELL " "> <PRINTB ,P-XADJN>)>
+	<COND (,P-XNAM ;<TELL " "> <PRINTB ,P-XNAM>)>)
        (.PRSO?
 	<BUFFER-PRINT <GET ,P-ITBL ,P-NC1> <GET ,P-ITBL ,P-NC1L> <>>)
        (T

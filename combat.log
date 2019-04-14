@@ -1,0 +1,73 @@
+20-Aug-86 17:05:25 ZILCH started.  Load is  3.04.
+SYS:ZILCH.EXE Z4
+
+
+Compiling SS:<ENCHANTER>Z4.ZIL.4
+[Classic Instructions]
+ *** ENCHANTER: Interlogic Fantasy ***
+
+
+Compiling SS:<ENCHANTER>SYNTAX.ZIL.122
+Compiling SS:<ENCHANTER>MACROS.ZIL.22
+Compiling SS:<ENCHANTER>CLOCK.ZIL.3
+Compiling SS:<ENCHANTER>MAIN.ZIL.86
+Compiling SS:<ENCHANTER>GPARSER.ZIL.9
+Compiling SS:<ENCHANTER>VERBS.ZIL.245
+Compiling SS:<ENCHANTER>RECORD.ZIL.1
+Compiling SS:<ENCHANTER>GLOBALS.ZIL.139
+Compiling SS:<ENCHANTER>TERROR.ZIL.184
+Compiling SS:<ENCHANTER>STAIR.ZIL.131
+Compiling SS:<ENCHANTER>MAGIC.ZIL.277
+Compiling SS:<ENCHANTER>KNOT.ZIL.51
+Compiling SS:<ENCHANTER>PURLOINED.ZIL.185
+Compiling SS:<ENCHANTER>CASTLE.ZIL.234
+Compiling SS:<ENCHANTER>TEMPLE.ZIL.78
+Compiling SS:<ENCHANTER>GALLERY.ZIL.40
+Compiling SS:<ENCHANTER>EGG.ZIL.48
+Compiling SS:<ENCHANTER>SLEEP.ZIL.85
+Compiling SS:<ENCHANTER>GEARS.ZIL.159
+Compiling SS:<ENCHANTER>OUTSIDE.ZIL.130
+ ** Warning: Word "THROUGH" has two TPREP meanings: PR?THROUGH and PR?WITH
+
+ ** Warning: Word "EXIT" has two TVERB meanings: ACT?EXIT and ACT?DROPCompiler halted.
+Used 6:38.9 in 00:13:55.
+ZAP started.  Load is  2.00.
+SYS:ZAP.EXE Z4 
+
+Assembling Z4.XZAP.4
+Release: 29
+
+    64	Inserting Z4FREQ.XZAP.1	   (626 bytes)
+   690	Inserting Z4DAT.ZAP.15	 (20784 bytes)
+ 21474	Inserting SYNTAX.ZAP.21	     (0 bytes)
+ 21474	Inserting MACROS.ZAP.21	   (117 bytes)
+ 21591	Inserting CLOCK.ZAP.21	   (178 bytes)
+ 21769	Inserting MAIN.ZAP.21	  (2289 bytes)
+ 24058	Inserting GPARSER.ZAP.5	  (6898 bytes)
+ 30956	Inserting VERBS.ZAP.23	 (12130 bytes)
+ 43086	Inserting RECORD.ZAP.13	    (56 bytes)
+ 43142	Inserting GLOBALS.ZAP.22	  (2799 bytes)
+ 45941	Inserting TERROR.ZAP.20	  (4413 bytes)
+ 50354	Inserting STAIR.ZAP.20	  (5043 bytes)
+ 55397	Inserting MAGIC.ZAP.19	  (6509 bytes)
+ 61906	Inserting KNOT.ZAP.19	  (1368 bytes)
+ 63274	Inserting PURLOINED.ZAP.19	  (7343 bytes)
+ 70617	Inserting CASTLE.ZAP.19	  (6510 bytes)
+ 77127	Inserting TEMPLE.ZAP.18	  (3385 bytes)
+ 80512	Inserting GALLERY.ZAP.18	  (2162 bytes)
+ 82674	Inserting EGG.ZAP.17	  (1699 bytes)
+ 84373	Inserting SLEEP.ZAP.17	  (2358 bytes)
+ 86731	Inserting GEARS.ZAP.17	  (5826 bytes)
+ 92557	Inserting OUTSIDE.ZAP.17	  (3338 bytes)
+ 95895	Inserting Z4STR.ZAP.15	 (15231 bytes)
+255 objects.
+231 globals.
+723 word vocabulary.
+
+111126 bytes (109K).
+ 21474 bytes of preload.
+ 12653 bytes of impure.
+
+Outputting symbol tables
+Compiler halted.
+Used 53.9 in 00:01:08.

@@ -110,7 +110,7 @@ temple below is a mass of hunched figures, chanting in hideous tones.")
       (LDESC 
 "This is a small prison cell in the north tower of the temple. Hideous shapes
 can be seen through the iron-barred window in the prison door. From the temple,
-a blood-curdling chant can be heard.")
+a bloodcurdling chant can be heard.")
       (SOUTH TO TEMPLE IF TOWER-N-DOOR IS OPEN)
       (FLAGS RLANDBIT ONBIT)
       (TEXT

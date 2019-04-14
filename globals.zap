@@ -1,0 +1,424 @@
+
+
+	.FUNCT	NULL-F
+	RFALSE	
+
+
+	.FUNCT	GROUND-F
+	EQUAL?	PRSA,V?CLIMB-FOO,V?CLIMB-ON,V?CLIMB-UP /?THN6
+	EQUAL?	PRSA,V?BOARD \FALSE
+?THN6:	PRINTR	"You've got better things to do."
+
+
+	.FUNCT	CORRIDOR-F
+	EQUAL?	PRSA,V?WALK-TO,V?THROUGH \FALSE
+	CALL	USE-DIRECTIONS
+	RSTACK	
+
+
+	.FUNCT	WALLS-F
+	EQUAL?	WALLS,PRSO \?ELS5
+	EQUAL?	HERE,NORTH-CELL \?ELS5
+	CALL	PERFORM,PRSA,STONE-WALL
+	RSTACK	
+?ELS5:	FSET?	HERE,RMUNGBIT \?ELS9
+	EQUAL?	PRSA,V?EXAMINE \?ELS14
+	PRINTR	"The wall is stained and noisome."
+?ELS14:	EQUAL?	PRSA,V?LISTEN \FALSE
+	PRINTR	"That's noisome, not noisy!"
+?ELS9:	EQUAL?	PRSA,V?LOOK-INSIDE \FALSE
+	PRINTR	"They're translucent, not transparent!"
+
+
+	.FUNCT	CRETIN
+	EQUAL?	PRSA,V?ESCAPE \?ELS5
+	PRINTR	"There's no escaping yourself."
+?ELS5:	EQUAL?	PRSA,V?PUT \?ELS9
+	EQUAL?	PRSO,EGG \?ELS9
+	PRINTR	"If you don't succeed, there will be plenty of egg on your face."
+?ELS9:	EQUAL?	PRSA,V?BURN \?ELS15
+	PRINTR	"Ouch!"
+?ELS15:	EQUAL?	PRSA,V?LISTEN \?ELS19
+	PRINTR	"Yes?"
+?ELS19:	EQUAL?	PRSA,V?ALARM \?ELS23
+	PRINTR	"You are obviously awake already."
+?ELS23:	EQUAL?	PRSA,V?GUNCHO \?ELS27
+	PRINTI	"You vanish into oblivion where, to the relief of much of the Circle, you will be unable to do much harm."
+	CRLF	
+	CALL	FINISH
+	RSTACK	
+?ELS27:	EQUAL?	PRSA,V?FROTZ \?ELS31
+	FSET	PLAYER,ONBIT
+	SET	'ALWAYS-LIT,TRUE-VALUE
+	PRINTR	"You are bathed in a sickly yellow light, bright enough to read by."
+?ELS31:	EQUAL?	PRSA,V?BLORB \?ELS35
+	CALL	JIGS-UP,STR?48,FALSE-VALUE
+	RTRUE	
+?ELS35:	EQUAL?	PRSA,V?KULCAD \?ELS37
+	PRINTR	"You seem real enough already."
+?ELS37:	EQUAL?	PRSA,V?EXAMINE \?ELS41
+	PRINTR	"You are not a pretty sight."
+?ELS41:	EQUAL?	PRSA,V?GIVE \?ELS45
+	PRINTR	"I think you're a little confused."
+?ELS45:	EQUAL?	PRSA,V?ATTACK,V?MUNG,V?KILL \?ELS49
+	PRINTR	"You don't need my help to do that!"
+?ELS49:	EQUAL?	PRSA,V?FIND \?ELS53
+	PRINTR	"You're right here!"
+?ELS53:	EQUAL?	PRSA,V?CUT \FALSE
+	EQUAL?	PRSI,MAGIC-KNIFE \FALSE
+	PRINTR	"I should think one experience with that knife would be enough. I wouldn't press my luck."
+
+
+	.FUNCT	WINDOW-F
+	EQUAL?	PRSA,V?LOOK-INSIDE \?ELS5
+	GRTR?	TOD,NIGHTFALL \?ELS10
+	PRINTR	"It's too dark to make out much of anything."
+?ELS10:	GETP	HERE,P?TEXT
+	PRINT	STACK
+	CRLF	
+	RTRUE	
+?ELS5:	EQUAL?	PRSA,V?OPEN \?ELS18
+	PRINTR	"You can't open it."
+?ELS18:	EQUAL?	PRSA,V?CLOSE \FALSE
+	PRINTR	"It already is."
+
+
+	.FUNCT	SEA-F
+	EQUAL?	HERE,BEACH /?ELS5
+	PRINTR	"The sea is off beyond the beach."
+?ELS5:	EQUAL?	PRSA,V?THROUGH \?ELS9
+	PRINTR	"You would drown."
+?ELS9:	EQUAL?	PRSA,V?EXAMINE \FALSE
+	PRINTR	"The sea is very rough. I wouldn't go in."
+
+
+	.FUNCT	FOREST-F
+	EQUAL?	PRSA,V?THROUGH \FALSE
+	CALL	USE-DIRECTIONS
+	RSTACK	
+
+
+	.FUNCT	TEMPLE-OBJ-F
+	EQUAL?	HERE,COURTYARD-2,COURTYARD-3 /?THN6
+	EQUAL?	HERE,COURTYARD-4,COURTYARD-7 \FALSE
+?THN6:	EQUAL?	PRSA,V?THROUGH \?ELS12
+	CALL	GOTO,TEMPLE
+	RTRUE	
+?ELS12:	EQUAL?	PRSA,V?LISTEN \FALSE
+	PRINTR	"You can hear a howling chant coming from inside the temple."
+
+
+	.FUNCT	COURTYARD-F
+	EQUAL?	PRSA,V?WALK-AROUND \?ELS5
+	EQUAL?	HERE,INSIDE-GATE /?ELS5
+	EQUAL?	HERE,COURTYARD-7,COURTYARD-6,COURTYARD-4 \?ELS12
+	CALL	DO-WALK,P?WEST
+	RSTACK	
+?ELS12:	CALL	DO-WALK,P?EAST
+	RSTACK	
+?ELS5:	EQUAL?	PRSA,V?THROUGH \FALSE
+	EQUAL?	HERE,INSIDE-GATE \FALSE
+	CALL	DO-WALK,P?EAST
+	RSTACK	
+
+
+	.FUNCT	TOWER-F
+	EQUAL?	PRSA,V?BOARD,V?CLIMB-FOO,V?CLIMB-UP \?ELS5
+	EQUAL?	HERE,PURLOINED-ROOM,SE-TOWER /?THN8
+	EQUAL?	HERE,NW-TOWER,SW-TOWER \?ELS5
+?THN8:	CALL	DO-WALK,P?UP
+	RSTACK	
+?ELS5:	EQUAL?	PRSA,V?CLIMB-FOO,V?CLIMB-DOWN \?ELS11
+	EQUAL?	HERE,JEWEL-ROOM,MAP-ROOM /?THN14
+	EQUAL?	HERE,ENGINE-ROOM,BEDROOM \?ELS11
+?THN14:	CALL	DO-WALK,P?DOWN
+	RSTACK	
+?ELS11:	EQUAL?	PRSA,V?CLIMB-FOO,V?CLIMB-UP \FALSE
+	PRINTR	"They are a bit far away to climb from here, and anyway the walls would be impossible to scale."
+
+
+	.FUNCT	JUG-F,E?=0
+	EQUAL?	PRSA,V?CLOSE,V?OPEN \?ELS3
+	PRINTR	"The jug has no cover. It can't be opened or closed."
+?ELS3:	EQUAL?	PRSA,V?MUNG,V?THROW \?ELS7
+	REMOVE	PRSO
+	SET	'E?,TRUE-VALUE
+	PRINTI	"The jug shatters into innumerable pieces."
+	CRLF	
+	JUMP	?CND1
+?ELS7:	EQUAL?	PRSA,V?SHAKE \?CND1
+	FSET?	PRSO,OPENBIT \?CND1
+	SET	'E?,TRUE-VALUE
+?CND1:	EQUAL?	PRSA,V?LOOK-INSIDE,V?EXAMINE \?ELS19
+	PRINTI	"The jug is "
+	IN?	WATER,PRSO /?ELS26
+	PRINTR	"empty."
+?ELS26:	GETP	WATER,P?SIZE
+	GET	JUG-AMTS,STACK
+	PRINT	STACK
+	CRLF	
+	RTRUE	
+?ELS19:	ZERO?	E? /FALSE
+	IN?	WATER,PRSO \TRUE
+	PRINTI	"The water spills to the ground and evaporates."
+	CRLF	
+	REMOVE	WATER
+	RTRUE	
+
+
+	.FUNCT	WATER-FUNCTION,AV,W,PI?
+	EQUAL?	PRSA,V?EXAMINE \?ELS3
+	EQUAL?	PRSO,GLOBAL-WATER \?ELS3
+	EQUAL?	HERE,BEACH \?ELS8
+	PRINTR	"The ocean streches out as far as the eye can see to the south and east."
+?ELS8:	EQUAL?	HERE,FOREST-2 \?ELS12
+	PRINTR	"The water is dark and murky, and lily pads cover most of the surface. I wouldn't drink the stuff."
+?ELS12:	PRINTR	"The brook runs slowly through thick vegetation."
+?ELS3:	EQUAL?	PRSA,V?THROUGH \?ELS20
+	EQUAL?	PRSO,GLOBAL-WATER \?ELS20
+	PRINTR	"You have better things to do with your time than go swimming."
+?ELS20:	EQUAL?	PRSA,V?DRINK-FROM \?ELS26
+	EQUAL?	PRSO,GLOBAL-WATER \?ELS26
+	CALL	V-DRINK-FROM
+	RTRUE	
+?ELS26:	EQUAL?	PRSA,V?SGIVE /FALSE
+	EQUAL?	PRSA,V?THROUGH \?ELS32
+	PRINTR	"Swimming here is fraught with peril."
+?ELS32:	EQUAL?	PRSA,V?FILL \?ELS36
+	SET	'W,PRSI
+	SET	'PRSA,V?PUT
+	SET	'PRSI,PRSO
+	SET	'PRSO,W
+	SET	'PI?,FALSE-VALUE
+	JUMP	?CND1
+?ELS36:	EQUAL?	PRSO,GLOBAL-WATER,WATER \?ELS38
+	SET	'W,PRSO
+	SET	'PI?,FALSE-VALUE
+	JUMP	?CND1
+?ELS38:	SET	'W,PRSI
+	SET	'PI?,TRUE-VALUE
+?CND1:	EQUAL?	W,GLOBAL-WATER \?CND41
+	EQUAL?	PRSA,V?DRINK /FALSE
+	SET	'W,WATER
+	EQUAL?	PRSA,V?PUT,V?TAKE \?CND41
+	REMOVE	W
+?CND41:	ZERO?	PI? /?ELS52
+	SET	'PRSI,W
+	JUMP	?CND50
+?ELS52:	SET	'PRSO,W
+?CND50:	LOC	WINNER >AV
+	EQUAL?	PRSA,V?PUT,V?TAKE \?ELS60
+	ZERO?	PI? \?ELS60
+	ZERO?	PRSI /?ELS67
+	EQUAL?	PRSI,JUG /?ELS67
+	EQUAL?	PRSI,SEA,GLOBAL-WATER \?ELS74
+	PRINTI	"Ok, but there was plenty enough there already."
+	CRLF	
+	REMOVE	W
+	RTRUE	
+?ELS74:	GETP	PRSI,P?CAPACITY
+	ZERO?	STACK /?ELS78
+	PRINTI	"The water leaks out of the "
+	PRINTD	PRSI
+	PRINTI	" and evaporates immediately."
+	CRLF	
+	REMOVE	W
+	RTRUE	
+?ELS78:	PRINTI	"The "
+	PRINTD	PRSI
+	PRINTR	" isn't a very good container."
+?ELS67:	IN?	JUG,WINNER \?ELS86
+	FSET?	JUG,OPENBIT /?ELS91
+	PRINTR	"The jug is closed."
+?ELS91:	CALL	GLOBAL-IN?,GLOBAL-WATER,HERE
+	ZERO?	STACK /?ELS95
+	IN?	WATER,JUG \?THN101
+	GETP	WATER,P?SIZE
+	LESS?	STACK,4 \?ELS100
+?THN101:	MOVE	WATER,JUG
+	PUTP	WATER,P?SIZE,4
+	PRINTI	"The jug is now full of "
+	EQUAL?	HERE,BEACH \?ELS107
+	FSET	WATER,RMUNGBIT
+	PRINTI	"sea"
+	JUMP	?CND105
+?ELS107:	EQUAL?	HERE,FOREST-2 \?ELS111
+	FSET	WATER,RMUNGBIT
+	PRINTI	"foul algae-infested "
+	JUMP	?CND105
+?ELS111:	FCLEAR	WATER,RMUNGBIT
+?CND105:	PRINTR	"water."
+?ELS100:	PRINTR	"The jug is already full."
+?ELS95:	PRINTR	"The only water here is in the jug."
+?ELS86:	IN?	PRSO,JUG \?ELS127
+	EQUAL?	PRSA,V?TAKE \?ELS127
+	ZERO?	PRSI \?ELS127
+	SET	'PRSO,JUG
+	CALL	ITAKE
+	SET	'PRSO,W
+	RETURN	PRSO
+?ELS127:	PRINTR	"The water slips through your fingers."
+?ELS60:	ZERO?	PI? /?ELS135
+	PRINTR	"Nice try."
+?ELS135:	EQUAL?	PRSA,V?GIVE,V?DROP \?ELS140
+	REMOVE	WATER
+	EQUAL?	PRSI,SEA,GLOBAL-WATER \?ELS145
+	PRINTR	"Ok, but there was plenty enough there already."
+?ELS145:	PRINTR	"The water spills to the ground and evaporates."
+?ELS140:	EQUAL?	PRSA,V?POUR-ON \?ELS153
+	REMOVE	WATER
+	PRINTI	"The water cascades off the "
+	PRINTD	PRSI
+	PRINTR	" and onto the ground."
+?ELS153:	EQUAL?	PRSA,V?THROW \FALSE
+	PRINTI	"The water splashes over everything and evaporates."
+	CRLF	
+	REMOVE	WATER
+	RTRUE	
+
+
+	.FUNCT	SKY-F,EL
+	FSET?	HERE,ONBIT \?ELS5
+	EQUAL?	PRSA,V?EXAMINE \?ELS5
+	DIV	TOD,10 >EL
+	PRINTI	"It would be "
+	GET	TIME-TABLE,EL
+	PRINT	STACK
+	PRINTI	" now."
+	GRTR?	TOD,NIGHTFALL \?CND10
+	PRINTI	" Bright stars shine down on the earth."
+?CND10:	CRLF	
+	RTRUE	
+?ELS5:	PRINTR	"That would be difficult from here."
+
+
+	.FUNCT	NOT-HERE-OBJECT-F,TBL,PRSO?=1,OBJ
+	EQUAL?	PRSO,NOT-HERE-OBJECT \?ELS3
+	EQUAL?	PRSI,NOT-HERE-OBJECT \?ELS3
+	PRINTR	"Those things aren't here!"
+?ELS3:	EQUAL?	PRSO,NOT-HERE-OBJECT \?ELS9
+	SET	'TBL,P-PRSO
+	JUMP	?CND1
+?ELS9:	SET	'TBL,P-PRSI
+	SET	'PRSO?,FALSE-VALUE
+?CND1:	ZERO?	PRSO? /?CND12
+	EQUAL?	PRSA,V?ZIFMIA /?THN19
+	EQUAL?	PRSA,V?CAST \?CND12
+	EQUAL?	PRSO,SUMMON-SPELL \?CND12
+?THN19:	CALL	FIND-NOT-HERE,TBL,PRSO? >OBJ
+	ZERO?	OBJ /FALSE
+	EQUAL?	OBJ,NOT-HERE-OBJECT \TRUE
+?CND12:	EQUAL?	WINNER,PLAYER \?ELS33
+	PRINTI	"You can't see any "
+	CALL	NOT-HERE-PRINT,PRSO?
+	PRINTI	" here!"
+	CRLF	
+	JUMP	?CND31
+?ELS33:	PRINTI	"The "
+	PRINTD	WINNER
+	PRINTI	" seems confused. ""I don't see any "
+	CALL	NOT-HERE-PRINT,PRSO?
+	PRINTI	" here!"""
+	CRLF	
+?CND31:	SET	'P-CONT,FALSE-VALUE
+	SET	'QUOTE-FLAG,FALSE-VALUE
+	RTRUE	
+
+
+	.FUNCT	FIND-NOT-HERE,TBL,PRSO?,M-F,OBJ
+	CALL	MOBY-FIND,TBL >M-F
+	ZERO?	DEBUG /?CND1
+	PRINTI	"[Moby-found "
+	PRINTN	M-F
+	PRINTI	" objects"
+	PRINTI	"]"
+	CRLF	
+?CND1:	GRTR?	M-F,1 \?CND7
+	GET	TBL,1
+	GETP	STACK,P?GLOBAL >OBJ
+	ZERO?	OBJ /?CND7
+	SET	'M-F,1
+	SET	'P-MOBY-FOUND,OBJ
+?CND7:	EQUAL?	1,M-F \?ELS16
+	ZERO?	DEBUG /?CND17
+	PRINTI	"[Namely: "
+	PRINTD	P-MOBY-FOUND
+	PRINTI	"]"
+	CRLF	
+?CND17:	ZERO?	PRSO? /?ELS25
+	SET	'PRSO,P-MOBY-FOUND
+	RFALSE	
+?ELS25:	SET	'PRSI,P-MOBY-FOUND
+	RFALSE	
+?ELS16:	ZERO?	PRSO? \?ELS30
+	PRINTI	"You wouldn't find any "
+	CALL	NOT-HERE-PRINT,PRSO?
+	PRINTR	" there."
+?ELS30:	RETURN	NOT-HERE-OBJECT
+
+
+	.FUNCT	GLOBAL-NOT-HERE-PRINT,OBJ
+	SET	'P-CONT,FALSE-VALUE
+	SET	'QUOTE-FLAG,FALSE-VALUE
+	PRINTI	"You can't see"
+	EQUAL?	OBJ,GLOBAL-KRILL /?CND3
+	PRINTI	" any"
+?CND3:	EQUAL?	OBJ,PRSO \?ELS10
+	CALL	PRSO-PRINT
+	JUMP	?CND8
+?ELS10:	CALL	PRSI-PRINT
+?CND8:	PRINTR	" here."
+
+
+	.FUNCT	NOT-HERE-PRINT,PRSO?,?TMP1
+	ZERO?	P-OFLAG /?ELS5
+	ZERO?	P-XADJ /?CND7
+	PRINTB	P-XADJN
+?CND7:	ZERO?	P-XNAM /FALSE
+	PRINTB	P-XNAM
+	RTRUE	
+?ELS5:	ZERO?	PRSO? /?ELS18
+	GET	P-ITBL,P-NC1 >?TMP1
+	GET	P-ITBL,P-NC1L
+	CALL	BUFFER-PRINT,?TMP1,STACK,FALSE-VALUE
+	RSTACK	
+?ELS18:	GET	P-ITBL,P-NC2 >?TMP1
+	GET	P-ITBL,P-NC2L
+	CALL	BUFFER-PRINT,?TMP1,STACK,FALSE-VALUE
+	RSTACK	
+
+
+	.FUNCT	BELBOZ-F
+	EQUAL?	PRSA,V?ZIFMIA \?ELS5
+	PRINTI	"A vision of the great Belboz begins to take shape before you, but "
+	GETP	HERE,P?TMAZE
+	ZERO?	STACK /?ELS12
+	PRINTR	"as soon as he realizes where you are, he disappears, a look of fear upon his face."
+?ELS12:	PRINTR	"with a curt word and a waggle of his finger, he disappears again, shaking his head in disappointment."
+?ELS5:	EQUAL?	PRSA,V?WHO,V?EXAMINE \FALSE
+	PRINTR	"Belboz is, in effect, your boss, professor, patron, and ultimate superior. He is the head of the Circle of Enchanters."
+
+
+	.FUNCT	GLOBAL-ROOM-F
+	EQUAL?	PRSA,V?EXAMINE,V?LOOK \?ELS5
+	CALL	PERFORM,V?LOOK
+	RTRUE	
+?ELS5:	EQUAL?	PRSA,V?WALK-AROUND \FALSE
+	PRINTR	"Walking around the room reveals nothing else of interest. If you want to move elsewhere, simply indicate the direction you wish to move in."
+
+
+	.FUNCT	BRAMBLES-F
+	CALL	OUTSIDE?,HERE
+	ZERO?	STACK \?ELS5
+	PRINTR	"The only brambles here are in your head."
+?ELS5:	EQUAL?	PRSA,V?LOOK-INSIDE,V?SEARCH \FALSE
+	PRINTR	"There's nothing in the brambles now. Count your blessings."
+
+
+	.FUNCT	GLOBAL-HOLE-F
+	EQUAL?	PRSA,V?DIG \?ELS5
+	PRINTR	"It's not worth the bother."
+?ELS5:	CALL	GLOBAL-NOT-HERE-PRINT,GLOBAL-HOLE
+	RSTACK	
+
+	.ENDI

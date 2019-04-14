@@ -297,8 +297,8 @@ game position, or end this session of the game?|
 	 <TELL
 "ENCHANTER|
 Infocom interactive fiction - a fantasy story|
-Copyright (C) 1983, 1984 by Infocom, Inc. All rights reserved.|
-ENCHANTER is a trademark of Infocom, Inc.|
+Copyright (C) 1983, 1984, 1986 by Infocom, Inc. All rights reserved.|
+ENCHANTER is a registered trademark of Infocom, Inc.|
 Release ">
 	 <PRINTN <BAND <GET 0 1> *3777*>>
 	 <TELL " / Serial number ">
@@ -309,7 +309,7 @@ Release ">
 			<PRINTC <GETB 0 .CNT>>)>>
 	 <CRLF>>
 
-<ROUTINE V-AGAIN ("AUX" OBJ)
+;<ROUTINE V-AGAIN ("AUX" OBJ)
 	 <COND (<==? ,L-PRSA ,V?WALK>
 		<SETG P-WALK-DIR ,L-PRSO>
 		<PERFORM ,L-PRSA ,L-PRSO>)
@@ -539,7 +539,8 @@ manuscript. His wishes prevail, and it is agreed to send you back...." CR>
 			      <RFATAL>)
 			     (<EQUAL? ,WINNER ,TURTLE>
 			      <COND (<IN? ,TURTLE <LOC ,PLAYER>>
-				     <TELL "\"I can't go that way.\"" CR>)>
+				     <TELL "\"I can't go that way.\"" CR>)
+				    (ELSE <NO-RESPONSE>)>
 			      <RFATAL>)
 			     (<OUTSIDE? ,HERE>
 			      <TELL "There's no path in that direction." CR>
@@ -564,16 +565,17 @@ manuscript. His wishes prevail, and it is agreed to send you back...." CR>
 		<JIGS-UP
 "Oh, no! Something has come up from behind you and feasted on your person!">
 		<RFATAL>)
-	       (<AND <EQUAL? ,WINNER ,TURTLE>
-		     <IN? ,TURTLE <LOC ,PLAYER>>>
-		<TELL "\"I can't go that way.\"" CR>)
+	       (<EQUAL? ,WINNER ,TURTLE>
+		<COND (<IN? ,TURTLE <LOC ,PLAYER>>
+		       <TELL "\"I can't go that way.\"" CR>)
+		      (ELSE <NO-RESPONSE>)>
+		<RFATAL>)
 	       (T
 		<TELL "You can't go that way." CR>
 		<RFATAL>)>>
 
 <ROUTINE THIS-IS-IT (OBJ)
-	 <SETG P-IT-OBJECT .OBJ>
-	 <SETG P-IT-LOC ,HERE>>
+	 <SETG P-IT-OBJECT .OBJ>>
 
 <ROUTINE V-INVENTORY ()
 	 <COND (<FIRST? ,WINNER> <PRINT-CONT ,WINNER>)
@@ -594,7 +596,8 @@ manuscript. His wishes prevail, and it is agreed to send you back...." CR>
 		<COND ;(<FSET? ,PRSO ,WEARBIT>
 		       <TELL "You are already wearing it." CR>)
 		      (T <TELL "You already have it." CR>)>)
-	       (<AND <FSET? <LOC ,PRSO> ,CONTBIT>
+	       (<AND <LOC ,PRSO>
+		     <FSET? <LOC ,PRSO> ,CONTBIT>
 		     <NOT <FSET? <LOC ,PRSO> ,OPENBIT>>>
 		<TELL "You can't reach that." CR>
 		<RTRUE>)
@@ -804,7 +807,7 @@ manuscript. His wishes prevail, and it is agreed to send you back...." CR>
 
 <GLOBAL COPR-NOTICE
 " a transcript of interaction with ENCHANTER|
-ENCHANTER is a trademark of Infocom, Inc.|
+ENCHANTER is a registered trademark of Infocom, Inc.|
 Copyright (c) 1983 Infocom, Inc. All rights reserved.|">
 
 <ROUTINE V-SCRIPT ()
@@ -1696,14 +1699,15 @@ line. For example, \"ERASE THE LINE BETWEEN X AND Z.\"" CR>)
 		 <SET X .N>>>
 
 <ROUTINE RIPOFF (X WHERE)
-	 <COND (<AND <NOT <IN? .X .WHERE>>
-		     <NOT <FSET? .X ,INVISIBLE>>
+	 <COND (<AND <NOT <FSET? .X ,INVISIBLE>>
 		     <NOT <FSET? .X ,SCROLLBIT>>
 		     <NOT <EQUAL? .X ,BREAD ,JUG>>
 		     <FSET? .X ,TOUCHBIT>
 		     <FSET? .X ,TAKEBIT>>
-		<COND (<==? .X ,STRONG-BOX> <RFALSE>)>
-		<COND (.WHERE <MOVE .X .WHERE>)
+		<COND (<==? .X ,STRONG-BOX> <RFALSE>)
+		      (<AND .WHERE <IN? .X .WHERE>>
+		       <RFALSE>)
+		      (.WHERE <MOVE .X .WHERE>)
 		      (ELSE <REMOVE .X>)>
 		<RTRUE>)>>
 

@@ -45,7 +45,6 @@
 	 <SETG LIT T>
 	 <SETG WINNER ,PLAYER>
 	 <SETG HERE ,WEST-FORK>
-	 <SETG P-IT-LOC ,HERE>
 	 <SETG P-IT-OBJECT <>>
 	 <COND (<NOT <FSET? ,HERE ,TOUCHBIT>>
 		<TELL 
@@ -81,17 +80,41 @@ you are Sent." CR>
 	 <AGAIN>>    
 
 
-<ROUTINE MAIN-LOOP ("AUX" ICNT OCNT NUM CNT OBJ TBL V PTBL OBJ1 TMP) 
+<ROUTINE MAIN-LOOP ("AUX" TRASH)
+	<REPEAT ()
+	     <SET TRASH <MAIN-LOOP-1>>>>
+
+<ROUTINE MAIN-LOOP-1 ("AUX" ICNT OCNT NUM CNT OBJ TBL V PTBL OBJ1 TMP) 
    #DECL ((CNT OCNT ICNT NUM) FIX (V) <OR 'T FIX FALSE> (OBJ) <OR FALSE OBJECT>
 	  (OBJ1) OBJECT (TBL) TABLE (PTBL) <OR FALSE ATOM>)
-   <REPEAT ()
      <SET CNT 0>
      <SET OBJ <>>
      <SET PTBL T>
      <COND (<SETG P-WON <PARSER>>
 	    <SET ICNT <GET ,P-PRSI ,P-MATCHLEN>>
+	    <SET OCNT <GET ,P-PRSO ,P-MATCHLEN>>
+	    <COND (<AND ,P-IT-OBJECT <ACCESSIBLE? ,P-IT-OBJECT>>
+		   <SET TMP <>>
+		   <REPEAT ()
+			   <COND (<G? <SET CNT <+ .CNT 1>> .ICNT>
+				  <RETURN>)
+				 (T
+				  <COND (<EQUAL? <GET ,P-PRSI .CNT> ,IT>
+					 <PUT ,P-PRSI .CNT ,P-IT-OBJECT>
+					 <SET TMP T>
+					 <RETURN>)>)>>
+		   <COND (<NOT .TMP>
+			  <SET CNT 0>
+			  <REPEAT ()
+			   <COND (<G? <SET CNT <+ .CNT 1>> .OCNT>
+				  <RETURN>)
+				 (T
+				  <COND (<EQUAL? <GET ,P-PRSO .CNT> ,IT>
+					 <PUT ,P-PRSO .CNT ,P-IT-OBJECT>
+					 <RETURN>)>)>>)>
+		   <SET CNT 0>)>
 	    <SET NUM
-		 <COND (<0? <SET OCNT <GET ,P-PRSO ,P-MATCHLEN>>> .OCNT)
+		 <COND (<0? .OCNT> .OCNT)
 		       (<G? .OCNT 1>
 			<SET TBL ,P-PRSO>
 			<COND (<0? .ICNT> <SET OBJ <>>)
@@ -164,7 +187,8 @@ you are Sent." CR>
 						     <NOT <EQUAL?
 							   <LOC .OBJ1>
 							   ,WINNER
-							   ,HERE>>>
+							   ,HERE
+							   .OBJ>>>
 						<AGAIN>)
 					       (<AND <VERB? TAKE>
 						     ,PRSI
@@ -189,7 +213,7 @@ you are Sent." CR>
 			  <SET V
 			       <APPLY <GETP <LOC ,WINNER> ,P?ACTION>
 				      ,M-END>>)>)>
-	    <COND (<VERB? AGAIN ;WALK SAVE RESTORE SCORE VERSION> T)
+	    <COND (<VERB? ;AGAIN ;WALK SAVE RESTORE SCORE VERSION> T)
 		  (T
 		   <SETG L-PRSA ,PRSA>
 		   <SETG L-PRSO ,PRSO>
@@ -200,7 +224,7 @@ you are Sent." CR>
      <COND (,P-WON
 	    <COND (<VERB? TELL BRIEF SUPER-BRIEF VERBOSE SAVE VERSION
 			  TIME QUIT RESTART SCORE SCRIPT UNSCRIPT RESTORE> T)
-		  (T <SET V <CLOCKER>>)>)>>>
+		  (T <SET V <CLOCKER>>)>)>>
  
 <GLOBAL L-PRSA <>>  
  
@@ -222,7 +246,7 @@ you are Sent." CR>
 	<SET OO ,PRSO>
 	<SET OI ,PRSI>
 	<COND (<AND <EQUAL? ,IT .I .O>
-		    <NOT <EQUAL? ,P-IT-LOC ,HERE>>>
+		    <NOT <ACCESSIBLE? ,P-IT-OBJECT>>>
 	       <TELL "I don't see what you are referring to." CR>
 	       <RFATAL>)>
 	<COND (<==? .O ,IT> <SET O ,P-IT-OBJECT>)>
@@ -230,8 +254,7 @@ you are Sent." CR>
 	<SETG PRSA .A>
 	<SETG PRSO .O>
 	<COND (<AND ,PRSO <NOT <VERB? WALK>>>
-	       <SETG P-IT-OBJECT ,PRSO>
-	       <SETG P-IT-LOC ,HERE>)>
+	       <SETG P-IT-OBJECT ,PRSO>)>
 	<SETG PRSI .I>
 	<COND (<AND <EQUAL? ,NOT-HERE-OBJECT ,PRSO ,PRSI>
 		    <SET V <NOT-HERE-OBJECT-F>>>
@@ -277,7 +300,7 @@ you are Sent." CR>
 	<SET OO ,PRSO>
 	<SET OI ,PRSI>
 	<COND (<AND <EQUAL? ,IT .I .O>
-		    <NOT <EQUAL? ,P-IT-LOC ,HERE>>>
+		    <NOT <ACCESSIBLE? ,P-IT-OBJECT>>>
 	       <TELL "I don't see what you are referring to." CR>
 	       <RFATAL>)>
 	<COND (<==? .O ,IT> <SET O ,P-IT-OBJECT>)>
@@ -285,8 +308,7 @@ you are Sent." CR>
 	<SETG PRSA .A>
 	<SETG PRSO .O>
 	<COND (<AND ,PRSO <NOT <VERB? WALK>>>
-	       <SETG P-IT-OBJECT ,PRSO>
-	       <SETG P-IT-LOC ,HERE>)>
+	       <SETG P-IT-OBJECT ,PRSO>)>
 	<SETG PRSI .I>
 	<COND (<AND <EQUAL? ,NOT-HERE-OBJECT ,PRSO ,PRSI>
 		    <SET V <D-APPLY "Not Here" ,NOT-HERE-OBJECT-F>>>

@@ -175,7 +175,8 @@ thrash around for a while and then give up." CR>)
 		<TELL "You try to sleep but it's too noisy." CR>)
 	       (<AND <EQUAL? ,HERE ,BEDROOM>
 		     <NOT <IN? ,WINNER ,BED>>
-		     <NOT ,BED-WARNING>>
+		     <NOT ,BED-WARNING>
+		     <NOT <G? ,AWAKE 10>>>
 		<SETG BED-WARNING T>
 		<TELL
 "You might try getting into the bed first. It would be more comfortable." CR>)

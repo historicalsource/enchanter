@@ -137,7 +137,7 @@ molesting adventurers in ZORK II." CR>)
 		<TELL
 "The Wizard of Frobozz was a former member of the Circle of Enchanters, but
 he was removed for forgetfulness bordering on senility. The lively wit of his
-youth having been replaced by a semi-sadistic mischievousness coupled with
+youth having been replaced by a semisadistic mischievousness coupled with
 an inability to pronounce words beginning with other than the letter \"F\",
 he was \"retired\" to a small, unoccupied corner of the Great Underground
 Empire, hopefully out of harm's way." CR>)>>
@@ -195,7 +195,7 @@ the ground, revealing a small niche in the wall">
 	(SYNONYM NICHE)
 	(ADJECTIVE SMALL)
 	(CAPACITY 30)
-	(FLAGS CONTBIT OPENBIT NDESCBIT)
+	(FLAGS CONTBIT OPENBIT NDESCBIT SEARCHBIT)
 	(ACTION PORTRAIT-NICHE-F)>
 
 <ROUTINE PORTRAIT-NICHE-F ()
